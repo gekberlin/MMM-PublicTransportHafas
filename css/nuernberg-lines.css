@@ -70,12 +70,12 @@
 
 .str6 {
   background-color: #ffd400;
-  color: #000000;
+  color: #000;
 }
 
 .str7 {
   background-color: #a5add8;
-  color: #000000;
+  color: #000;
 }
 
 .str8 {
@@ -92,7 +92,7 @@
   width: 3.5em;
 }
 
-/* 
+/*
   Nightliner Buses
 */
 
@@ -117,7 +117,7 @@
 }
 
 .busn5 {
-  background-color: #ffcc00;
+  background-color: #fc0;
   color: black;
 }
 
@@ -142,7 +142,7 @@
 }
 
 .busn10 {
-  background-color: #0099aa;
+  background-color: #09a;
   color: white;
 }
 

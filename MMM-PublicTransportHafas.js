@@ -209,7 +209,6 @@ Module.register("MMM-PublicTransportHafas", {
       return;
     }
 
-    // eslint-disable-next-line default-case
     switch (notification) {
       case "FETCHER_INITIALIZED":
         this.initialized = true;

@@ -1,0 +1,7 @@
+.bus {
+  background-color: #ed0020;
+  border-radius: 0;
+  color: white;
+  width: 3em;
+  clip-path: polygon(0% 50%, 20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%);
+}

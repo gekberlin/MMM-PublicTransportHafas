@@ -1,6 +1,6 @@
 {
   "name": "mmm-publictransporthafas",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Public transport module for MagicMirror² driven by hafas-client data.",
   "repository": {
     "type": "git",
@@ -31,11 +31,11 @@
     "node": ">=14"
   },
   "dependencies": {
-    "dayjs": "^1.11.3",
-    "hafas-client": "^5.24.1"
+    "dayjs": "^1.11.5",
+    "hafas-client": "^5.25.0"
   },
   "devDependencies": {
-    "eslint": "^8.19.0",
+    "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
@@ -44,9 +44,9 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "stylelint": "^14.9.1",
+    "stylelint": "^14.11.0",
     "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^26.0.0",
+    "stylelint-config-standard": "^28.0.0",
     "stylelint-prettier": "^2.0.0"
   },
   "scripts": {

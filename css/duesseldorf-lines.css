@@ -1,4 +1,22 @@
-/* Override default background-color for all busses */
-.bus {
+.str701,
+.str706 {
+  background-color: red;
+  color: white;
+  opacity: 0.4;
+}
+
+.bus835,
+.bus836,
+.bus723,
+.bus827,
+.bus893,
+.bus77350 {
   background-color: #f8c623;
+  color: white;
+  opacity: 0.4;
+}
+
+.bus835,
+.bus836 {
+  opacity: 1;
 }

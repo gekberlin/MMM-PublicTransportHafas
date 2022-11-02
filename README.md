@@ -35,12 +35,14 @@ For more information see the [Configuration](#configuration) section.
 
 ## Screenshots
 
+<!-- prettier-ignore-start -->
 |![Example: Goerdelerring Leipzig, all directions](img/Goerdelerring_all.png)<br>*Leipzig, Goerdelerring (all directions)*|![Example: Goerdelerring Leipzig, heading to main station](img/Goerdelerring_to_hbf.png)<br>*Leipzig, Goerdelerring (heading to main station)*|
 |---|---|
 |![Example: Hauptbahnhof, Leipzig, only tram](img/Hauptbahnhof_tram_only.png)<br>*Hauptbahnhof, Leipzig (displaying only trams and two unreachable departures)*|![Example: Hauptbahnhof, Leipzig, only regional and national trains](img/Hauptbahnhof_train_only.png)<br>*Hauptbahnhof, Leipzig (displaying only regional and national trains)*|
 |![Example: Leuschner Platz with relative departure time and reorderd columns](img/Leuschner_Platz_relative.png)<br>*Leuschner Platz, Leipzig (displaying departure times in relative format and reordered columns)*|
+<!-- prettier-ignore-end -->
 
-![Example: Multiple instances in Berlin, showing the last update time](img/UpdateTimeDisplayed.png)<br>*Several instances in Berlin, showing the last update time*
+![Example: Multiple instances in Berlin, showing the last update time](img/UpdateTimeDisplayed.png)<br>_Several instances in Berlin, showing the last update time_
 
 ## Installing
 
@@ -109,6 +111,7 @@ The module is quite configurable. The only option you really have to set is `sta
 
 These are the possible options:
 
+<!-- prettier-ignore-start -->
 | Option | Description |
 |--------|-------------|
 | `hafasProfile`                    | <p>The name of the hafas profile.</p><p>**Type:** `string`<br>**Example:** `"insa"`<br>**Default value:** `"db"`</p><p>**Note:** In most cases you don't need to change the value. You can find supported profiles and there names [here](https://github.com/public-transport/hafas-client/blob/master/p/readme.md).</p><p>Each profile uses its own StationIDs. So if you change the profile, you have to find out the StationID again.</p>|
@@ -143,6 +146,7 @@ These are the possible options:
 | `displayLastUpdate`               | <p>If true this will display the last update time at the end of the task list. See screenshot above</p><p>**Type:** `boolean`<br>**Default value:** `true`<br>**Possible values:** `true` and `false`</p>|
 | `displayLastUpdateFormat`         | <p>Format to use for the time display if displayLastUpdate:true</p><p>**Type:** `string`<br>**Example:** `'HH:mm:ss'`<br>**Default value:** `'dd - HH:mm:ss'`</p>See [dayjs.js formats](https://day.js.org/docs/en/parse/string-format) for the other format possibilities.</p>|
 | `animationSpeed`                  | <p>Speed of the update animation.</p><p>**Type:** `integer`<br>**Possible values:** `0` - `5000`<br>**Default value:** `2000`<br>**Unit:** `milliseconds`</p>|
+<!-- prettier-ignore-end -->
 
 Here is an example for an entry in `config.js`
 
@@ -197,6 +201,7 @@ Basically you can set whatever you want in the CSS file but it is recommended to
 
 In Leipzig the tram lines 2, 8 and 9 use a yellow color. Since the lines share the same settings the CSS class names are listed with commas so that the settings apply to each listed class.
 
+<!-- prettier-ignore-start -->
 ```css
 .str2, .str8, .str9 {
   background-color: #f8c623;  /* yellow background */
@@ -204,9 +209,11 @@ In Leipzig the tram lines 2, 8 and 9 use a yellow color. Since the lines share t
   width: 1em;                 /* the width is equal to the font size (the line symbol will be a square) */
 }
 ```
+<!-- prettier-ignore-end -->
 
 Some night buses in Leipzig use an orange-ish color. All bus symbols are circles in Leipzig.
 
+<!-- prettier-ignore-start -->
 ```css
 .busn1, .busn1e, .busn5, .busn5e, .busn8, .busn8e {
   background-color: #ee9f2e;  /* orange-ish background */
@@ -215,6 +222,7 @@ Some night buses in Leipzig use an orange-ish color. All bus symbols are circles
   width: 1em;                 /* the width is equal to the font size (the line symbol will be a square, or in this case a circle) */
 }
 ```
+<!-- prettier-ignore-end -->
 
 ### Customizing the color for delays
 

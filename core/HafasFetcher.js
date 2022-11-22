@@ -37,44 +37,6 @@ module.exports = class HafasFetcher {
   constructor(config) {
     this.leadTime = 20; // minutes
     this.config = config;
-
-    // types given by the api
-    this.possibleTypes = [
-      "bus",
-      "ferry",
-      "express",
-      "national",
-      "nationalExpress",
-      "regional",
-      "suburban",
-      "subway",
-      "tram",
-      "taxi",
-      // for SVV
-      "bahn-s-bahn",
-      "u-bahn",
-      "strassenbahn",
-      "fernbus",
-      "regionalbus",
-      "stadtbus",
-      "seilbahn-zahnradbahn",
-      "schiff",
-      // for SBB
-      "express-train",
-      "international-train",
-      "interregional-train",
-      "regional-express-train",
-      "watercraft",
-      "suburban-train",
-      "bus-taxi",
-      "gondola",
-      "car-train"
-    ];
-
-    this.config.includedTransportationTypes = getArrayDiff(
-      this.possibleTypes,
-      this.config.excludedTransportationTypes
-    );
   }
 
   async init() {
@@ -85,6 +47,15 @@ module.exports = class HafasFetcher {
     this.hafasClient = createClient(
       profile,
       `MMM-PublicTransportHafas v${pjson.version}`
+    );
+
+    // Possible transportation types given by profil
+    this.possibleTransportationTypes = profile.products.map((s) => s.id);
+
+    // Remove the excluded types from the possible types
+    this.config.includedTransportationTypes = getArrayDiff(
+      this.possibleTransportationTypes,
+      this.config.excludedTransportationTypes
     );
   }
 

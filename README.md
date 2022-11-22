@@ -72,7 +72,7 @@ Running the script:
 change to `MagicMirror/modules/MMM-PublicTransportHafas` then start the script by typing
 
 ```bash
-node ./convenience/query_stations.js
+node ./convenience/query_stations.mjs
 ```
 
 The following example shows a query for "Leipzig, Wilhelm-Leuschner-Platz". This station is included two times in the result. You have to experiment which ID gives the best results.
@@ -102,7 +102,7 @@ Gefundene Haltestellen für "Leipzig, Wilhelm-Leuschner-Platz":
 By default, the module uses the `db` profile of the `hafas-client`. In some cases it can be advantageous to use a different profile - e.g. the default profile often does not provide platform information from local transport companies. [Here](https://github.com/public-transport/hafas-client/blob/master/p/readme.md) you can find the name of all supported interfaces. Just add the name as a parameter to the command. Like 'sbb' for the profile of Swiss Railways.
 
 ```bash
-node ./convenience/query_stations.js sbb
+node ./convenience/query_stations.mjs sbb
 ```
 
 ## Configuration

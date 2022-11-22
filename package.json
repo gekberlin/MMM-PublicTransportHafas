@@ -1,6 +1,6 @@
 {
   "name": "mmm-publictransporthafas",
-  "version": "1.5.4",
+  "version": "2.0.0",
   "description": "Public transport module for MagicMirror² driven by hafas-client data.",
   "repository": {
     "type": "git",
@@ -28,11 +28,11 @@
   },
   "homepage": "https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "dependencies": {
     "dayjs": "^1.11.7",
-    "hafas-client": "^5.26.1"
+    "hafas-client": "^6.00.1"
   },
   "devDependencies": {
     "eslint": "^8.30.0",

@@ -19,11 +19,12 @@ module.exports = NodeHelper.create({
     }
   },
 
-  createFetcher(config) {
+  async createFetcher(config) {
     let fetcher;
 
     if (typeof this.departuresFetchers[config.identifier] === "undefined") {
       fetcher = new HafasFetcher(config);
+      await fetcher.init();
       this.departuresFetchers[config.identifier] = fetcher;
       Log.info(
         `Transportation fetcher for station with id '${fetcher.getStationID()}' created.`

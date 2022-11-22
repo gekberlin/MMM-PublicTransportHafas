@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
-const createClient = require("hafas-client");
-const readline = require("readline");
+import { createClient } from "hafas-client";
+import * as readline from "node:readline";
 
 let profileName = "";
-let profile = "";
 
 const productMap = {
   bus: "Bus",
@@ -65,6 +64,43 @@ function printStationInfo(station) {
   }
 }
 
+function query(profile) {
+  if (profile !== "" && profile !== undefined) {
+    const client = createClient(profile, "MMM-PublicTransportHafas");
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    rl.question(
+      "Geben Sie eine Adresse oder einen Stationsnamen ein: ",
+      (answer) => {
+        rl.close();
+
+        const opt = {
+          results: 10,
+          stations: true,
+          adresses: false,
+          poi: false
+        };
+
+        client
+          .locations(answer, opt)
+          .then((response) => {
+            console.info(`\nGefundene Haltestellen für '${answer}':\n`);
+
+            response.forEach((station) => {
+              printStationInfo(station);
+            });
+
+            process.exit(0);
+          })
+          .catch(console.error);
+      }
+    );
+  }
+}
+
 if (process.argv.length === 3) {
   profileName = process.argv[2];
   console.info(`Using hafas-client profile: ${profileName}`);
@@ -74,42 +110,11 @@ if (process.argv.length === 3) {
 }
 
 try {
-  profile = require(`hafas-client/p/${profileName}`);
+  (async () => {
+    const module = await import(`hafas-client/p/${profileName}/index.js`);
+    const profile = module.profile;
+    query(profile);
+  })();
 } catch (err) {
   console.error(`\n${err.message}\n Did you choose the right profile name? \n`);
-}
-
-if (profile !== "") {
-  const client = createClient(profile, "MMM-PublicTransportHafas");
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-
-  rl.question(
-    "Geben Sie eine Adresse oder einen Stationsnamen ein: ",
-    (answer) => {
-      rl.close();
-
-      const opt = {
-        results: 10,
-        stations: true,
-        adresses: false,
-        poi: false
-      };
-
-      client
-        .locations(answer, opt)
-        .then((response) => {
-          console.info(`\nGefundene Haltestellen für '${answer}':\n`);
-
-          response.forEach((station) => {
-            printStationInfo(station);
-          });
-
-          process.exit(0);
-        })
-        .catch(console.error);
-    }
-  );
 }

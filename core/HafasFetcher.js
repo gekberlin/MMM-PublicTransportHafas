@@ -1,6 +1,4 @@
 /* global config */
-
-const createClient = require("hafas-client");
 const dayjs = require("dayjs");
 const isSameOrAfter = require("dayjs/plugin/isSameOrAfter");
 const Log = require("logger");
@@ -39,11 +37,6 @@ module.exports = class HafasFetcher {
   constructor(config) {
     this.leadTime = 20; // minutes
     this.config = config;
-    const profile = require(`hafas-client/p/${this.config.hafasProfile}`);
-    this.hafasClient = createClient(
-      profile,
-      `MMM-PublicTransportHafas v${pjson.version}`
-    );
 
     // types given by the api
     this.possibleTypes = [
@@ -84,6 +77,17 @@ module.exports = class HafasFetcher {
     );
   }
 
+  async init() {
+    const { createClient } = await import("hafas-client");
+    const { profile } = await import(
+      `hafas-client/p/${this.config.hafasProfile}/index.js`
+    );
+    this.hafasClient = createClient(
+      profile,
+      `MMM-PublicTransportHafas v${pjson.version}`
+    );
+  }
+
   getIdentifier() {
     return this.config.identifier;
   }
@@ -92,34 +96,32 @@ module.exports = class HafasFetcher {
     return this.config.stationID;
   }
 
-  fetchDepartures() {
+  async fetchDepartures() {
     const options = {
       when: this.getDepartureTime(),
       direction: this.config.direction,
       duration: this.getTimeInFuture()
     };
 
-    return this.hafasClient
-      .departures(this.config.stationID, options)
-      .then((departures) => {
-        const maxElements =
-          this.config.maxReachableDepartures +
-          this.config.maxUnreachableDepartures;
-        let filteredDepartures = this.filterByTransportationTypes(departures);
-        filteredDepartures = this.filterByIgnoredLines(filteredDepartures);
-        filteredDepartures = this.filterByStopId(filteredDepartures);
-        filteredDepartures =
-          this.departuresMarkedWithReachability(filteredDepartures);
-        filteredDepartures =
-          this.departuresRemovedSurplusUnreachableDepartures(
-            filteredDepartures
-          );
-        filteredDepartures = filteredDepartures.slice(0, maxElements);
-        return filteredDepartures;
-      })
-      .catch((e) => {
-        throw e;
-      });
+    const departures = await this.hafasClient.departures(
+      this.config.stationID,
+      options
+    );
+    const maxElements =
+      this.config.maxReachableDepartures + this.config.maxUnreachableDepartures;
+    let filteredDepartures = this.filterByTransportationTypes(
+      departures.departures
+    );
+
+    filteredDepartures = this.filterByIgnoredLines(filteredDepartures);
+    filteredDepartures = this.filterByStopId(filteredDepartures);
+    filteredDepartures =
+      this.departuresMarkedWithReachability(filteredDepartures);
+    filteredDepartures =
+      this.departuresRemovedSurplusUnreachableDepartures(filteredDepartures);
+    filteredDepartures = filteredDepartures.slice(0, maxElements);
+
+    return filteredDepartures;
   }
 
   getDepartureTime() {

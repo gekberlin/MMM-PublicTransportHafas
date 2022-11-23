@@ -111,8 +111,7 @@ if (process.argv.length === 3) {
 
 try {
   (async () => {
-    const module = await import(`hafas-client/p/${profileName}/index.js`);
-    const profile = module.profile;
+    const { profile } = await import(`hafas-client/p/${profileName}/index.js`);
     query(profile);
   })();
 } catch (err) {

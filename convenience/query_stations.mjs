@@ -92,18 +92,16 @@ if (process.argv.length === 3) {
   profileName = "db";
 }
 
-(async () => {
-  try {
-    const { profile } = await import(`hafas-client/p/${profileName}/index.js`);
+try {
+  const { profile } = await import(`hafas-client/p/${profileName}/index.js`);
 
-    Object.keys(profile.products).forEach((key) => {
-      const productMapKey = profile.products[key].id;
-      const productMapName = profile.products[key].name;
-      productMap[productMapKey] = productMapName;
-    });
+  Object.keys(profile.products).forEach((key) => {
+    const productMapKey = profile.products[key].id;
+    const productMapName = profile.products[key].name;
+    productMap[productMapKey] = productMapName;
+  });
 
-    query(profile);
-  } catch (e) {
-    console.error(`${e.message}\n\n Did you choose the right profile name? \n`);
-  }
-})();
+  query(profile);
+} catch (e) {
+  console.error(`${e.message}\n\n Did you choose the right profile name? \n`);
+}

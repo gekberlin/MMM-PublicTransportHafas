@@ -139,8 +139,19 @@ Module.register("MMM-PublicTransportHafas", {
   getDom() {
     const domBuilder = new PTHAFASDomBuilder(this.config);
 
+    // Error handling
     if (this.hasErrors()) {
-      return domBuilder.getSimpleDom(this.error.message);
+      Log.error(this.error.message);
+      let errorMessage = `${this.translate("LOADING")}<br><br>⚠️ `;
+
+      if (this.error.code === "ENOTFOUND") {
+        // HAFAS endpoint not available
+        errorMessage += `${this.translate("ERROR_ENOTFOUND")}`;
+      } else {
+        // All other errors
+        errorMessage += `${this.error.message}`;
+      }
+      return domBuilder.getSimpleDom(errorMessage);
     }
 
     if (!this.initialized) {

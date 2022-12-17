@@ -37,15 +37,6 @@ module.exports = class HafasFetcher {
   constructor(config) {
     this.leadTime = 20; // minutes
     this.config = config;
-
-    // Possible transportation types given by profil
-    this.possibleTransportationTypes = profile.products.map((s) => s.id);
-
-    // Remove the excluded types from the possible types
-    this.config.includedTransportationTypes = getArrayDiff(
-      this.possibleTransportationTypes,
-      this.config.excludedTransportationTypes
-    );
   }
 
   async init() {
@@ -56,6 +47,15 @@ module.exports = class HafasFetcher {
     this.hafasClient = createClient(
       profile,
       `MMM-PublicTransportHafas v${pjson.version}`
+    );
+
+    // Possible transportation types given by profil
+    this.possibleTransportationTypes = profile.products.map((s) => s.id);
+
+    // Remove the excluded types from the possible types
+    this.config.includedTransportationTypes = getArrayDiff(
+      this.possibleTransportationTypes,
+      this.config.excludedTransportationTypes
     );
   }
 

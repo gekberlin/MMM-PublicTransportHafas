@@ -15,7 +15,6 @@
   ],
   "author": {
     "name": "Kristjan ESPERANTO",
-    "email": "kristjan.esperanto@gmail.com",
     "url": "https://github.com/KristjanESPERANTO"
   },
   "contributors": [
@@ -26,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas/issues"
   },
-  "homepage": "https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas",
+  "homepage": "https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas#readme",
   "engines": {
     "node": ">=16"
   },

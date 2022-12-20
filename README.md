@@ -44,9 +44,9 @@ For more information see the [Configuration](#configuration) section.
 
 ![Example: Multiple instances in Berlin, showing the last update time](img/UpdateTimeDisplayed.png)<br>_Several instances in Berlin, showing the last update time_
 
-## Installing
+## Installation
 
-Just clone the module into your MagicMirror modules folder and execute `npm install --omit=dev` in the module’s directory:
+Just clone the module into your modules folder of your MagicMirror² and execute `npm install --omit=dev` in the module’s directory:
 
 ```bash
 git clone https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas
@@ -54,7 +54,7 @@ cd MMM-PublicTransportHafas
 npm install --omit=dev
 ```
 
-## Updating
+## Update
 
 Go to the module’s folder inside MagicMirror modules folder and pull the latest version from GitHub and install:
 
@@ -112,8 +112,8 @@ The module is quite configurable. The only option you really have to set is `sta
 These are the possible options:
 
 <!-- prettier-ignore-start -->
-| Option | Description |
-|--------|-------------|
+| Option                            | Description    |
+|-----------------------------------|----------------|
 | `hafasProfile`                    | <p>The name of the hafas profile.</p><p>**Type:** `string`<br>**Example:** `"insa"`<br>**Default value:** `"db"`</p><p>**Note:** In most cases you don't need to change the value. You can find supported profiles and there names [here](https://github.com/public-transport/hafas-client/blob/master/p/readme.md).</p><p>Each profile uses its own StationIDs. So if you change the profile, you have to find out the StationID again.</p>|
 | `stationID`                       | <p>The ID you want to display departures for.</p><p>**REQUIRED**<br>**Type:** `string`<br>**Example:** `"8012202"`<br>**Default value:** none</p><p>**Note:** How to get the ID is described [here](#how-to-get-the-stationid).</p>|
 | `stationName`                     | <p>The name of the station as it should appear on the display.</p><p>**Type:** `string`<br>**Example:** `"Wilhelm-Leuschner-Platz"`<br>**Default value:** none</p><p>**Note:** If you leave this setting, `headerPrefix` and `headerAppendix` blank the module will show an empty header.</p>|

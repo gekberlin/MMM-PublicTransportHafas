@@ -11,8 +11,8 @@
 - [Description](#description)
 - [How it works](#how-it-works)
 - [Screenshots](#screenshots)
-- [Installing](#installing)
-- [Updating](#updating)
+- [Installation](#installation)
+- [Update](#update)
 - [How to get the `stationID`](#how-to-get-the-stationid)
 - [Configuration](#configuration)
 - [Multiple instances](#multiple-instances)
@@ -42,7 +42,7 @@ For more information see the [Configuration](#configuration) section.
 |![Example: Leuschner Platz with relative departure time and reorderd columns](img/Leuschner_Platz_relative.png)<br>*Leuschner Platz, Leipzig (displaying departure times in relative format and reordered columns)*|
 <!-- prettier-ignore-end -->
 
-![Example: Multiple instances in Berlin, showing the last update time](img/UpdateTimeDisplayed.png)<br>_Several instances in Berlin, showing the last update time_
+![Example: Multiple instances in Berlin, showing the last update time](img/UpdateTimeDisplayed.png)<br>*Several instances in Berlin, showing the last update time*
 
 ## Installation
 

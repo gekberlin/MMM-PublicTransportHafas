@@ -22,7 +22,6 @@
   background-color: #1e944b;
   border-radius: 1.25rem;
   color: white;
-  width: 2em;
 }
 
 /*
@@ -35,7 +34,6 @@
 .str3e {
   background-color: #5eb246;
   color: white;
-  width: 1em;
 }
 
 .str2,
@@ -43,13 +41,11 @@
 .str9 {
   background-color: #f8c623;
   color: black;
-  width: 1em;
 }
 
 .str14 {
   background-color: #00a8db;
   color: black;
-  width: 1em;
 }
 
 .str4,
@@ -58,7 +54,6 @@
 .str15 {
   background-color: #174489;
   color: white;
-  width: 1em;
 }
 
 .str10,
@@ -68,7 +63,6 @@
 .str56 {
   background-color: #d8232a;
   color: white;
-  width: 1em;
 }
 
 /*
@@ -90,7 +84,6 @@
   background-color: #912a7d;
   border-radius: 1em;
   color: white;
-  width: 1em;
 }
 
 .bus61,
@@ -139,7 +132,6 @@
   background-color: #a3a3a2;
   border-radius: 1em;
   color: white;
-  width: 1em;
 }
 
 .busn1,
@@ -151,7 +143,6 @@
   background-color: #ee9f2e;
   border-radius: 1em;
   color: #164585;
-  width: 1em;
 }
 
 .busn2,
@@ -161,7 +152,6 @@
   background-color: #fbde89;
   border-radius: 1em;
   color: #164585;
-  width: 1em;
 }
 
 .busn3,
@@ -175,5 +165,4 @@
   background-color: #fcd120;
   border-radius: 1em;
   color: #164585;
-  width: 1em;
 }

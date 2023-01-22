@@ -142,6 +142,7 @@ them from the MagicMirror² core system and other modules.
   padding: 0.2rem;
   position: relative;
   text-align: center;
+  width: max-content;
 }
 
 .mmm-pth-bwl-line-sign {
@@ -174,7 +175,6 @@ them from the MagicMirror² core system and other modules.
   background-color: rgb(0 111 53);
   border: 0.5px white solid;
   color: white;
-  width: max-content;
 }
 
 /* Default properties for busses (general) and obusses (SVV) */
@@ -183,7 +183,6 @@ them from the MagicMirror² core system and other modules.
   border-radius: 1em;
   background-color: rgb(122 32 106);
   color: white;
-  width: max-content;
 }
 
 /* Default properties for "Rufbusse" */
@@ -197,7 +196,6 @@ them from the MagicMirror² core system and other modules.
   border-radius: 1rem;
   background-color: rgb(122 32 106);
   color: white;
-  width: max-content;
 }
 
 /* Default properties for trams */
@@ -205,14 +203,12 @@ them from the MagicMirror² core system and other modules.
 .stb {
   background-color: rgb(255 0 0);
   color: white;
-  width: max-content;
 }
 
 /* Default properties for subways */
 .u {
   background-color: rgb(0 101 173);
   color: white;
-  width: max-content;
 }
 
 .mmm-pth-ice-with-product-name::before {

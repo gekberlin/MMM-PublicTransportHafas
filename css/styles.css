@@ -134,7 +134,7 @@ them from the MagicMirror² core system and other modules.
 /* Styles for line symbols. */
 .mmm-pth-sign {
   background-color: #333;
-  color: #666;
+  color: white;
   min-width: 2.5ch;
   font-size: 0.9em;
   font-weight: bold;
@@ -147,7 +147,7 @@ them from the MagicMirror² core system and other modules.
 
 .mmm-pth-bwl-line-sign {
   background-color: #333;
-  color: #666;
+  color: white;
   margin-right: 0.3em;
 }
 
@@ -168,47 +168,40 @@ them from the MagicMirror² core system and other modules.
 .re {
   background-color: rgb(31 131 50);
   border: 0.5px white solid;
-  color: white;
 }
 
 .s {
   background-color: rgb(0 111 53);
   border: 0.5px white solid;
-  color: white;
 }
 
 /* Default properties for busses (general) and obusses (SVV) */
 .bus,
 .obus {
-  border-radius: 1em;
+  border-radius: 1rem;
   background-color: rgb(122 32 106);
-  color: white;
 }
 
 /* Default properties for "Rufbusse" */
 .ruf::before {
   content: "☎ ";
-  color: white;
   font-size: 0.8em;
 }
 
 .ruf {
   border-radius: 1rem;
   background-color: rgb(122 32 106);
-  color: white;
 }
 
 /* Default properties for trams */
 .str,
 .stb {
   background-color: rgb(255 0 0);
-  color: white;
 }
 
 /* Default properties for subways */
 .u {
   background-color: rgb(0 101 173);
-  color: white;
 }
 
 .mmm-pth-ice-with-product-name::before {

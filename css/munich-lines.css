@@ -147,7 +147,6 @@
 .bus {
   background-color: #d0672f;
   border-radius: 1em;
-  color: white;
 }
 
 /*
@@ -157,5 +156,4 @@ div[class^="x"],
 div[class*=" x"] {
   background-color: #779986;
   border-radius: 1em;
-  color: white;
 }

@@ -62,8 +62,7 @@
 }
 
 /*
-  Bus symbols should be displayed as a circle. That’s why the width and the
-  border-radius are both 1em.
+  Bus lines
  */
 .bus65,
 .bus70,
@@ -78,7 +77,6 @@
 .bus89,
 .bus90 {
   background-color: #912a7d;
-  border-radius: 1em;
 }
 
 .bus61,
@@ -125,7 +123,6 @@
 .bus724,
 .bus743 {
   background-color: #a3a3a2;
-  border-radius: 1em;
 }
 
 .busn1,
@@ -135,7 +132,6 @@
 .busn8,
 .busn8e {
   background-color: #ee9f2e;
-  border-radius: 1em;
   color: #164585;
 }
 
@@ -144,7 +140,6 @@
 .busn7,
 .busn7e {
   background-color: #fbde89;
-  border-radius: 1em;
   color: #164585;
 }
 
@@ -157,6 +152,5 @@
 .busn9,
 .busn9e {
   background-color: #fcd120;
-  border-radius: 1em;
   color: #164585;
 }

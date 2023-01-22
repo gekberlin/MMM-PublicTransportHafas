@@ -146,7 +146,6 @@
 */
 .bus {
   background-color: #d0672f;
-  border-radius: 1em;
 }
 
 /*
@@ -155,5 +154,5 @@
 div[class^="x"],
 div[class*=" x"] {
   background-color: #779986;
-  border-radius: 1em;
+  border-radius: 1rem;
 }

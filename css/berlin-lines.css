@@ -5,13 +5,12 @@
 
 /*
   Bus lines share the same background color and a white text color.
-  The border radius is slightly bigger than the font size. This will result
-  in nice round corners.
+  The border radius is pulled from the styles.css of MMM-PublicTransportHafas/css.
+  This will result in nice round corners.
  */
 
 .bus {
   background-color: #981e7b;
-  border-radius: 1em;
 }
 
 /*
@@ -22,60 +21,54 @@
   Source: https://en.wikipedia.org/wiki/Berlin_S-Bahn#Routes
   */
 
+.s {
+  border-radius: 1.25rem;
+}
+
 .s1 {
   background-color: #d96ea2;
-  border-radius: 1.25rem;
 }
 
 .s2,
 .s25,
 .s26 {
   background-color: #127734;
-  border-radius: 1.25rem;
 }
 
 .s3 {
   background-color: #0167ad;
-  border-radius: 1.25rem;
 }
 
 .s41 {
   background-color: #ad5a37;
-  border-radius: 1.25rem;
 }
 
 .s42 {
   background-color: #cb651d;
-  border-radius: 1.25rem;
 }
 
 .s45,
 .s46,
 .s47 {
   background-color: #127734;
-  border-radius: 1.25rem;
 }
 
 .s5 {
   background-color: #ea7619;
-  border-radius: 1.25rem;
 }
 
 .s7,
 .s75 {
   background-color: #816fa5;
-  border-radius: 1.25rem;
 }
 
 .s8,
 .s85 {
   background-color: #6aaa28;
-  border-radius: 1.25rem;
 }
 
 .s9 {
   background-color: #992644;
-  border-radius: 1.25rem;
 }
 
 /*

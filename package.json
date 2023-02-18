@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas#readme",
   "engines": {
-    "node": ">=16"
+    "node": ">=16",
+    "npm": ">=9"
   },
   "dependencies": {
     "dayjs": "^1.11.7",

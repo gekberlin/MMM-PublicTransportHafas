@@ -66,41 +66,41 @@ npm install --omit=dev
 
 ## How to get the `stationID`
 
-For your convenience a script to query the hafas system for a `stationID` is included. The script is located in the `convenience` folder inside the module’s folder. Run the script and enter the station name. It is useful to enter a city name too since the system knows a lot of stations even outside Germany.
+You need the `stationId` for the station whose departures should be displayed.
 
-Running the script:
+Here's how to find out the `stationId`:
 
-change to `MagicMirror/modules/MMM-PublicTransportHafas` then start the script by typing
-
-```bash
-node ./convenience/query_stations.mjs
-```
+1. You have to be in the modules folder (`MagicMirror/modules/MMM-PublicTransportHafas`).
+2. Then start the script by typing `node ./convenience/query_stations.mjs`.
+3. Enter a station name. It is useful to enter a city name too since the system knows a lot of stations even outside Germany.
+4. The result could contain one or more possible stations with valid IDs.
+5. Use the appropriate ID as `stationId` in the configuration of the module.
 
 The following example shows a query for "Leipzig, Wilhelm-Leuschner-Platz". This station is included two times in the result. You have to experiment which ID gives the best results.
 
 ```bash
-Geben Sie eine Adresse oder einen Stationsnamen ein: Leipzig, Wilhelm-Leuschner-Platz
+Enter an address or station name: Leipzig, Wilhelm-Leuschner-Platz
 
-Gefundene Haltestellen für "Leipzig, Wilhelm-Leuschner-Platz":
+Stops found for 'Leipzig, Wilhelm-Leuschner-Platz':
 
-> Haltestelle: "Leipzig Wilhelm-Leuschner-Platz"
-  ID: 008012202
-  Verkehrsmittel: S-Bahn, Bus, Tram
+ > Stop: Leipzig Wilhelm-Leuschner-Platz
+   ID: 8012202
+   Transport product(s): Regio, S-Bahn, Bus, Tram
 
-> Haltestelle: "Wilhelm-Leuschner-Platz, Leipzig"
-  ID: 000955252
-  Verkehrsmittel: Bus, Tram
+ > Stop: Wilhelm-Leuschner-Platz, Leipzig
+   ID: 955252
+   Transport product(s): Regio, S-Bahn, Bus, Tram
 
-> Haltestelle: "Wilhelm-Leuschner-Platz, Weiterstadt"
-  ID: 000115849
-  Verkehrsmittel: Bus
+ > Stop: Wilhelm-Leuschner-Platz, Weiterstadt
+   ID: 115849
+   Transport product(s): Regio, Bus
 
-> Haltestelle: "Wilhelm-Liebknecht-Platz, Leipzig"
-  ID: 000956558
-  Verkehrsmittel: Bus, Tram
+ > Stop: Wilhelm-Liebknecht-Platz, Leipzig
+   ID: 956558
+   Transport product(s): Bus, Tram
 ```
 
-By default, the module uses the `db` profile of the `hafas-client`. In some cases it can be advantageous to use a different profile - e.g. the default profile often does not provide platform information from local transport companies. [Here](https://github.com/public-transport/hafas-client/blob/master/p/readme.md) you can find the name of all supported interfaces. Just add the name as a parameter to the command. Like 'sbb' for the profile of Swiss Railways.
+By default, the module uses the `db` profile of the `hafas-client`. In some cases it can be advantageous to use a different profile - e.g. the default profile often does not provide platform information from local transport companies. [Here](https://github.com/public-transport/hafas-client/blob/master/p/readme.md) you can find the name of all supported interfaces. Just add the name as a parameter to the command. Like `sbb` for the profile of Swiss Railways.
 
 ```bash
 node ./convenience/query_stations.mjs sbb

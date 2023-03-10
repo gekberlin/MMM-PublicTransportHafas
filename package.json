@@ -52,8 +52,9 @@
   "scripts": {
     "lint": "eslint . && stylelint **/*.css && prettier --check .",
     "lint:fix": "eslint --fix . && stylelint --fix **/*.css && prettier --write .",
-    "test": "npm run lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "query_station": "node ./convenience/query_stations.mjs",
+    "test": "npm run lint"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",

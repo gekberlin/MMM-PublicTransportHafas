@@ -216,43 +216,41 @@ Module.register("MMM-PublicTransportHafas", {
   },
 
   socketNotificationReceived(notification, payload) {
-    if (!this.isForThisStation(payload)) {
-      return;
-    }
+    if (this.isForThisStation(payload)) {
+      switch (notification) {
+        case "FETCHER_INITIALIZED":
+          this.initialized = true;
+          this.startFetchingLoop(this.config.updatesEvery);
 
-    switch (notification) {
-      case "FETCHER_INITIALIZED":
-        this.initialized = true;
-        this.startFetchingLoop(this.config.updatesEvery);
+          break;
 
-        break;
+        case "DEPARTURES_FETCHED":
+          if (this.config.displayLastUpdate) {
+            this.lastUpdate = Date.now() / 1000; // save the timestamp of the last update to be able to display it
+          }
 
-      case "DEPARTURES_FETCHED":
-        if (this.config.displayLastUpdate) {
-          this.lastUpdate = Date.now() / 1000; // save the timestamp of the last update to be able to display it
-        }
+          Log.log(
+            `TransportHafas update OK, station : ${
+              this.config.stationName
+            } at : ${+dayjs
+              .unix(this.lastUpdate)
+              .format(this.config.displayLastUpdateFormat)}`
+          );
 
-        Log.log(
-          `TransportHafas update OK, station : ${
-            this.config.stationName
-          } at : ${+dayjs
-            .unix(this.lastUpdate)
-            .format(this.config.displayLastUpdateFormat)}`
-        );
+          // reset error object
+          this.error = {};
+          this.departures = payload.departures;
+          this.updateDom(this.config.animationSpeed);
+          this.sendNotification("TRANSPORT_HAFAS", payload.departures);
+          break;
 
-        // reset error object
-        this.error = {};
-        this.departures = payload.departures;
-        this.updateDom(this.config.animationSpeed);
-        this.sendNotification("TRANSPORT_HAFAS", payload.departures);
-        break;
+        case "FETCH_ERROR":
+          this.error = payload.error;
+          this.departures = [];
+          this.updateDom(this.config.animationSpeed);
 
-      case "FETCH_ERROR":
-        this.error = payload.error;
-        this.departures = [];
-        this.updateDom(this.config.animationSpeed);
-
-        break;
+          break;
+      }
     }
   },
 

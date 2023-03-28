@@ -178,7 +178,7 @@ class PTHAFASTableBodyBuilder {
         break;
       }
       case "platform": {
-        let platform = departure.platform;
+        let { platform } = departure;
         if (platform === null) platform = departure.plannedPlatform;
         if (platform === null) platform = "";
         cell = this.getPlatformCell(platform);
@@ -257,7 +257,7 @@ class PTHAFASTableBodyBuilder {
         this.lineId = lineNameWithoutSpaces.slice(firstNumberPosition);
       }
     } else {
-      this.lineId = lineName.split(" ")[1];
+      [, this.lineId] = lineName.split(" ");
     }
 
     return this.lineId;
@@ -309,7 +309,7 @@ class PTHAFASTableBodyBuilder {
         this.product = lineNameWithoutSpaces.slice(0, firstNumberPosition);
       }
     } else {
-      this.product = lineName.split(" ")[0];
+      [this.product] = lineName.split(" ");
     }
 
     return this.product;

@@ -110,7 +110,7 @@ module.exports = class HafasFetcher {
   }
 
   getTimeInFuture() {
-    let timeInFuture = this.config.timeInFuture;
+    let { timeInFuture } = this.config;
     if (this.config.maxUnreachableDepartures > 0) {
       timeInFuture += this.leadTime;
     }

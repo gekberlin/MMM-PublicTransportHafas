@@ -1,5 +1,14 @@
-name: Super-Linter
+---
+#################################
+#################################
+## Super Linter GitHub Actions ##
+#################################
+#################################
+name: Lint Code Base
 
+#############################
+# Start the job on all push #
+#############################
 on:
   # Run this workflow every time a new commit pushed to main branch
   push:
@@ -8,14 +17,19 @@ on:
   pull_request:
     branches: [main, develop]
 
-permissions:
-  contents: read
-
+###############
+# Set the Job #
+###############
 jobs:
-  super-lint:
+  build:
+    # Name the Job
     name: Lint Code Base
+    # Set the agent to run on
     runs-on: ubuntu-latest
 
+    ##################
+    # Load all steps #
+    ##################
     steps:
       ##########################
       # Checkout the code base #
@@ -23,7 +37,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
+          # Full git history is needed to get a proper
+          # list of changed files within `super-linter`
           fetch-depth: 0
 
       - name: install modules
@@ -33,7 +48,7 @@ jobs:
       ################################
       # Run Linter against code base #
       ################################
-      - name: Run Super-Linter
+      - name: Lint Code Base
         uses: github/super-linter/slim@v4
         env:
           VALIDATE_ALL_CODEBASE: true
@@ -42,6 +57,6 @@ jobs:
           LINTER_RULES_PATH: /
           CSS_FILE_NAME: .stylelintrc.json
           MARKDOWN_CONFIG_FILE: .markdownlint.json
+          JAVASCRIPT_DEFAULT_STYLE: prettier
           JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
           YAML_CONFIG_FILE: .yamllint.yaml
-          JAVASCRIPT_DEFAULT_STYLE: prettier

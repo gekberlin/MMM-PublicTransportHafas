@@ -85,7 +85,8 @@ module.exports = class HafasFetcher {
     );
 
     filteredDepartures = this.filterByIgnoredLines(filteredDepartures);
-    filteredDepartures = this.filterByStopId(filteredDepartures);
+    if (this.config.ignoreRelatedStations)
+      filteredDepartures = this.filterByStopId(filteredDepartures);
     filteredDepartures =
       this.departuresMarkedWithReachability(filteredDepartures);
     filteredDepartures =
@@ -149,15 +150,9 @@ module.exports = class HafasFetcher {
    * @returns {any} Filtered departures.
    */
   filterByStopId(departures) {
-    if (this.config.ignoreRelatedStations) {
-      return departures.filter((departure) => {
-        const stopId = departure.stop.id;
-        const index = this.config.stationID.indexOf(stopId);
-
-        return index !== -1;
-      });
-    }
-    return departures;
+    return departures.filter(
+      (departure) => departure.stop.id === this.config.stationID
+    );
   }
 
   departuresMarkedWithReachability(departures) {

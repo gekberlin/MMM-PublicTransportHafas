@@ -42,7 +42,7 @@ Module.register("MMM-PublicTransportHafas", {
     showTableHeaders: true,             // Show table headers?
     showTableHeadersAsSymbols: true,    // Table Headers as symbols or written?
     showWarningRemarks: true,           // Show warning remarks?
-    tableHeaderOrder: ["time", "line", "direction", "platform" ], // In which order should the table headers appear?
+    tableHeaderOrder: ["time", "line", "direction", "platform"], // In which order should the table headers appear?
     maxUnreachableDepartures: 0,        // How many unreachable departures should be shown?
     maxReachableDepartures: 7,          // How many reachable departures should be shown?
     fadeUnreachableDepartures: true,

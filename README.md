@@ -6,6 +6,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/KristjanESPERANTO/mmm-publictransporthafas)](https://github.com/KristjanESPERANTO/mmm-publictransporthafas/stargazers)
 [![GitHub license](https://img.shields.io/github/license/KristjanESPERANTO/mmm-publictransporthafas?style=plastic)](https://github.com/KristjanESPERANTO/mmm-publictransporthafas/blob/master/LICENSE)
 [![GitHub Super-Linter](https://github.com/KristjanESPERANTO/mmm-publictransporthafas/workflows/Super-Linter/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![MegaLinter](https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas/workflows/MegaLinter/badge.svg?branch=main)](https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas/actions?query=workflow%3AMegaLinter+branch%3Amain)
 
 **MMM-PublicTransportHafas is a module for [MagicMirror²](https://github.com/MichMich/MagicMirror) to display public transport departures.**
 

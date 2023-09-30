@@ -13,7 +13,6 @@ on:
   pull_request:
     branches:
       - main
-      - master
 
 # Comment env block if you do not want to apply fixes
 env:
@@ -65,7 +64,7 @@ jobs:
 
         # You can override MegaLinter flavor used to have faster performances
         # More info at https://megalinter.io/latest/flavors/
-        uses: oxsecurity/megalinter@beta
+        uses: oxsecurity/megalinter/flavors/javascript@beta
 
         id: ml
 

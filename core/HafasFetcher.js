@@ -85,8 +85,9 @@ module.exports = class HafasFetcher {
     );
 
     filteredDepartures = this.filterByIgnoredLines(filteredDepartures);
-    if (this.config.ignoreRelatedStations)
+    if (this.config.ignoreRelatedStations) {
       filteredDepartures = this.filterByStopId(filteredDepartures);
+    }
     filteredDepartures =
       this.departuresMarkedWithReachability(filteredDepartures);
     filteredDepartures =

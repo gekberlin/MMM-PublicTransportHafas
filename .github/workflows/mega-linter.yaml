@@ -35,6 +35,8 @@ concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
 
+permissions: read-all
+
 jobs:
   megalinter:
     name: MegaLinter
@@ -62,7 +64,7 @@ jobs:
       - name: MegaLinter
 
         # You can override MegaLinter flavor used to have faster performances
-        # More info at https://megalinter.io/flavors/
+        # More info at https://megalinter.io/latest/flavors/
         uses: oxsecurity/megalinter@beta
 
         id: ml

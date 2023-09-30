@@ -13,20 +13,13 @@ APPLY_FIXES: all
 # If you use ENABLE_LINTERS variable, all other linters will be disabled by
 # default
 #ENABLE_LINTERS:
-#  - ACTION_ACTIONLINT
-#  - COPYPASTE_JSCPD
+#  - REPOSITORY_KICS
 
 DISABLE_LINTERS:
-  - COPYPASTE_JSCPD
-  - JAVASCRIPT_STANDARD
-  - MARKDOWN_MARKDOWN_TABLE_FORMATTER
-  - REPOSITORY_CHECKOV
-  - REPOSITORY_KICS
-  - REPOSITORY_TRIVY
-  - SPELL_CSPELL
-  - SPELL_LYCHEE
-# - COPYPASTE # Uncomment to disable checks of excessive copy-pastes
-# - SPELL # Uncomment to disable checks of spelling mistakes
+  - JAVASCRIPT_STANDARD # Does not match current ESLINT configuration.
+  - MARKDOWN_MARKDOWN_TABLE_FORMATTER # Hard formatting of large tables is not nice.
+  - REPOSITORY_KICS # TODO: Pin actions
+  - SPELL_CSPELL # Reports too many words.
 
 SHOW_ELAPSED_TIME: true
 

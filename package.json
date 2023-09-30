@@ -53,6 +53,7 @@
   "scripts": {
     "lint": "eslint . && stylelint **/*.css && prettier --check .",
     "lint:fix": "eslint --fix . && stylelint --fix **/*.css && prettier --write .",
+    "lint:megalinter": "mega-linter-runner --flavor javascript",
     "prepare": "husky install",
     "query_station": "node ./convenience/query_stations.mjs",
     "test": "npm run lint"

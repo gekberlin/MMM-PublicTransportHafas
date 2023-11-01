@@ -59,6 +59,13 @@ jobs:
           # improve performance
           fetch-depth: 0
 
+      - name: HACK run 'npm install' to have eslint-plugin-json and stylelint-prettier (see https://github.com/nvuillam/mega-linter/issues/787)
+        run: |
+          mv .npmrc .npmrc.old || true
+          npm install eslint-plugin-json@latest --no-save
+          npm install stylelint-prettier@latest --no-save
+          mv .npmrc.old .npmrc || true
+
       # MegaLinter
       - name: MegaLinter
 

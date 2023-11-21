@@ -47,32 +47,28 @@ module.exports = NodeHelper.create({
     });
   },
 
-  fetchDepartures(identifier) {
+  async fetchDepartures(identifier) {
     const fetcher = this.departuresFetchers[identifier];
 
-    if (typeof fetcher !== "undefined") {
-      fetcher
-        .fetchDepartures()
-        .then((fetchedDepartures) => {
-          const payload = {
-            identifier: fetcher.getIdentifier(),
-            departures: fetchedDepartures
-          };
-
-          this.sendSocketNotification("DEPARTURES_FETCHED", payload);
-        })
-        .catch((error) => {
-          const payload = {
-            identifier: fetcher.getIdentifier(),
-            error
-          };
-
-          this.sendSocketNotification("FETCH_ERROR", payload);
-        });
-    } else {
+    if (typeof fetcher === "undefined") {
       Log.log(
         "MMM-PublicTransportHafas: fetcher is undefined. If this occurs only sporadically, it is not a problem."
       );
+    } else {
+      try {
+        const fetchedDepartures = await fetcher.fetchDepartures();
+        const payload = {
+          departures: fetchedDepartures,
+          identifier: fetcher.getIdentifier()
+        };
+        this.sendSocketNotification("DEPARTURES_FETCHED", payload);
+      } catch (error) {
+        const payload = {
+          error,
+          identifier: fetcher.getIdentifier()
+        };
+        this.sendSocketNotification("FETCH_ERROR", payload);
+      }
     }
   }
 });

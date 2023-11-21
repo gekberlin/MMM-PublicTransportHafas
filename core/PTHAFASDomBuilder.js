@@ -5,10 +5,10 @@ class PTHAFASDomBuilder {
     this.config = config;
 
     this.headingSymbols = {
-      time: "fa fa-clock-o",
-      line: "fa fa-bus",
       direction: "fa fa-exchange",
-      platform: "fa fa-map-marker"
+      line: "fa fa-bus",
+      platform: "fa fa-map-marker",
+      time: "fa fa-clock-o"
     };
   }
 
@@ -95,10 +95,10 @@ class PTHAFASDomBuilder {
     const headerRow = document.createElement("tr");
     headerRow.className = "bold dimmed";
 
-    this.config.tableHeaderOrder.forEach((key) => {
+    for (const key of this.config.tableHeaderOrder) {
       const values = this.getHeadingValues(key, headings);
       headerRow.appendChild(this.getHeaderCell(values));
-    });
+    }
 
     tHead.appendChild(headerRow);
 
@@ -107,9 +107,9 @@ class PTHAFASDomBuilder {
 
   getHeadingValues(key, headings) {
     const result = {
-      text: headings[key],
+      cssClass: "",
       symbol: this.headingSymbols[key],
-      cssClass: ""
+      text: headings[key]
     };
 
     if (key === "line" || key === "direction" || key === "platform") {

@@ -8,10 +8,9 @@ dayjs.extend(isSameOrAfter);
 
 /**
  * Helper function to determine the difference between two arrays.
- *
- * @param {array} arrayA
- * @param {array} arrayB
- * @returns {array} An array that contains the elements from arrayA that are not contained in arrayB.
+ * @param {Array} arrayA
+ * @param {Array} arrayB
+ * @returns {Array} An array that contains the elements from arrayA that are not contained in arrayB.
  */
 function getArrayDiff(arrayA, arrayB) {
   return arrayA.filter((element) => !arrayB.includes(element));
@@ -50,7 +49,9 @@ module.exports = class HafasFetcher {
     );
 
     // Possible transportation types given by profil
-    this.possibleTransportationTypes = profile.products.map((s) => s.id);
+    this.possibleTransportationTypes = profile.products.map(
+      (product) => product.id
+    );
 
     // Remove the excluded types from the possible types
     this.config.includedTransportationTypes = getArrayDiff(
@@ -69,9 +70,9 @@ module.exports = class HafasFetcher {
 
   async fetchDepartures() {
     const options = {
-      when: this.getDepartureTime(),
       direction: this.config.direction,
-      duration: this.getTimeInFuture()
+      duration: this.getTimeInFuture(),
+      when: this.getDepartureTime()
     };
 
     const departures = await this.hafasClient.departures(
@@ -88,6 +89,7 @@ module.exports = class HafasFetcher {
     if (this.config.ignoreRelatedStations) {
       filteredDepartures = this.filterByStopId(filteredDepartures);
     }
+
     filteredDepartures =
       this.departuresMarkedWithReachability(filteredDepartures);
     filteredDepartures =
@@ -146,7 +148,6 @@ module.exports = class HafasFetcher {
    * has the option to deactivate this via `includeRelatedStations:false`, unfortunately not all endpoints
    * support this option. That is why there is this filter instead of the hafas-client option.
    * (This was noticed with the endpoint insa and the stationID 7393 (Magdeburg, Hauptbahnhof/Nord)).
-   *
    * @param {any} departures
    * @returns {any} Filtered departures.
    */

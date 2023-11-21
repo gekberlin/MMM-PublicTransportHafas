@@ -25,7 +25,7 @@ class PTHAFASTableBodyBuilder {
       (departure) => !departure.isReachable
     ).length;
 
-    departures.forEach((departure, index) => {
+    for (const [index, departure] of departures.entries()) {
       const row = this.getDeparturesTableRow(
         departure,
         index,
@@ -51,7 +51,7 @@ class PTHAFASTableBodyBuilder {
         nextDeparture,
         noDepartureMessage
       );
-    });
+    }
 
     return tBody;
   }
@@ -108,15 +108,15 @@ class PTHAFASTableBodyBuilder {
     const marquee = document.createElement("span");
     marquee.innerText = "";
 
-    departure.remarks.forEach((remark) => {
+    for (const remark of departure.remarks) {
       if (remark.type === "warning") {
         marquee.innerText += `  ⚠️  ${remark.summary.replaceAll("\n", " ")}:
           ${remark.text.replaceAll("\n", " ")}`;
       }
-    });
+    }
 
     if (marquee.innerText !== "") {
-      while (marquee.innerText.length < 3000) {
+      while (marquee.innerText.length < 3_000) {
         marquee.innerText += marquee.innerText;
       }
     }
@@ -144,10 +144,10 @@ class PTHAFASTableBodyBuilder {
       );
     }
 
-    this.config.tableHeaderOrder.forEach((key) => {
+    for (const key of this.config.tableHeaderOrder) {
       const cell = this.getCell(key, departure);
       row.appendChild(cell);
-    });
+    }
 
     return row;
   }
@@ -169,14 +169,17 @@ class PTHAFASTableBodyBuilder {
 
         break;
       }
+
       case "line": {
         cell = this.getLineCell(departure.line.name);
         break;
       }
+
       case "direction": {
         cell = this.getDirectionCell(departure.direction);
         break;
       }
+
       case "platform": {
         let { platform } = departure;
         if (platform === null) platform = departure.plannedPlatform;
@@ -230,6 +233,7 @@ class PTHAFASTableBodyBuilder {
       const sign = delay < 0 ? "-" : "+";
       this.delayString = sign + delay / 60;
     }
+
     return this.delayString;
   }
 
@@ -240,17 +244,19 @@ class PTHAFASTableBodyBuilder {
       time = dayjs(when).subtract(delay, "seconds");
       return time.format("LT");
     }
+
     if (dayjs(when).diff(dayjs()) > this.config.showRelativeTimeOnlyUnder) {
       return time.format("LT");
     }
+
     return time.fromNow();
   }
 
   getLineId(lineName) {
     this.lineId = lineName;
     if (lineName.search(" ") === -1) {
-      const lineNameWithoutSpaces = lineName.replace(/\s/g, "");
-      const firstNumberPosition = lineNameWithoutSpaces.search(/\d/);
+      const lineNameWithoutSpaces = lineName.replaceAll(/\s/gu, "");
+      const firstNumberPosition = lineNameWithoutSpaces.search(/\d/u);
       this.lineId = lineNameWithoutSpaces;
 
       if (firstNumberPosition > 0) {
@@ -283,6 +289,7 @@ class PTHAFASTableBodyBuilder {
     if (this.config.showColoredLineSymbols) {
       return this.getColoredCssClass(lineName);
     }
+
     return "mmm-pth-sign mmm-pth-bwl-line-sign";
   }
 
@@ -294,15 +301,14 @@ class PTHAFASTableBodyBuilder {
    * This function returns the product name. In the two examples already mentioned
    * (`RB50` and` RB 50`) the string `RB` would be returned. If there is no product name
    * (if the line name starts with a digit), `undefined` is returned.
-   *
    * @param  {string} lineName    The line name as it was delivered by the HAFAS API.
    * @returns {string} product     The product ('RB', 'S', 'U', ...).
    */
   getProduct(lineName) {
     this.product = lineName;
     if (lineName.search(" ") === -1) {
-      const lineNameWithoutSpaces = lineName.replace(/\s/g, "");
-      const firstNumberPosition = lineNameWithoutSpaces.search(/\d/);
+      const lineNameWithoutSpaces = lineName.replaceAll(/\s/gu, "");
+      const firstNumberPosition = lineNameWithoutSpaces.search(/\d/u);
       this.product = lineNameWithoutSpaces;
 
       if (firstNumberPosition > 0) {
@@ -320,27 +326,28 @@ class PTHAFASTableBodyBuilder {
    *
    * Class names are returned depending on the line name. This enables CSS styles
    * to be defined on the basis of various properties.
-   *
    * @param  {string} lineName     The linename as it was delivered by the HAFAS API.
    * @returns {string} classNames   Series of class names
    */
   getColoredCssClass(lineName) {
     let classNames = "mmm-pth-sign";
     const product = this.getProduct(lineName);
-    const dbProducts = ["IC", "ICE", "RE", "RB", "S"];
+    const DBProducts = ["IC", "ICE", "RE", "RB", "S"];
     const ignoreShowOnlyLineNumbers = ["IC", "ICE", "RE", "RB", "S", "U"];
 
-    if (dbProducts.includes(product)) {
+    if (DBProducts.includes(product)) {
       classNames += " mmm-pth-db-standard";
     }
+
     if (
       ignoreShowOnlyLineNumbers.includes(product) &&
       this.config.showOnlyLineNumbers
     ) {
       classNames += ` mmm-pth-${product.toLowerCase()}-with-product-name`;
     }
+
     classNames += ` ${product.toLowerCase()}`;
-    classNames += ` ${lineName.replace(/\s/g, "").toLowerCase()}`;
+    classNames += ` ${lineName.replaceAll(/\s/gu, "").toLowerCase()}`;
 
     return classNames;
   }
@@ -370,9 +377,9 @@ class PTHAFASTableBodyBuilder {
     const replacements = this.config.replaceInDirections;
     let processed = direction;
 
-    Object.keys(replacements).forEach((key) => {
+    for (const key of Object.keys(replacements)) {
       processed = processed.replaceAll(key, replacements[key]);
-    });
+    }
 
     return processed;
   }
@@ -384,7 +391,7 @@ class PTHAFASTableBodyBuilder {
 
   getRowOpacity(index, departuresCount) {
     if (!this.config.fadeReachableDepartures) {
-      return 1.0;
+      return 1;
     }
 
     const threshold =
@@ -406,7 +413,7 @@ class PTHAFASTableBodyBuilder {
 
   getUnreachableRowOpacity(index, count) {
     if (!this.config.fadeUnreachableDepartures) {
-      return 1.0;
+      return 1;
     }
 
     const startOpacity = 0.3;
@@ -416,6 +423,7 @@ class PTHAFASTableBodyBuilder {
     if (index + 1 === count) {
       return endOpacity;
     }
+
     return startOpacity + opacityDiff * index;
   }
 

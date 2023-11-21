@@ -38,7 +38,7 @@ Module.register("MMM-PublicTransportHafas", {
     showColoredLineSymbols: true,       // Want colored line symbols?
     useColorForRealtimeInfo: true,      // Want colored real time information (timeToStation, early)?
     showAbsoluteTime: true,             // How should the departure time be displayed? "15:10" (absolute) or "in 5 minutes" (relative)
-    showRelativeTimeOnlyUnder: 10*60*1000,  // Display the time only relatively if the departure takes place in less than 10 minutes (600000 milliseconds). The value is only relevant if showAbsoluteTime: false.
+    showRelativeTimeOnlyUnder: 10*60*1_000,  // Display the time only relatively if the departure takes place in less than 10 minutes (600000 milliseconds). The value is only relevant if showAbsoluteTime: false.
     showTableHeaders: true,             // Show table headers?
     showTableHeadersAsSymbols: true,    // Table Headers as symbols or written?
     showWarningRemarks: true,           // Show warning remarks?
@@ -50,7 +50,7 @@ Module.register("MMM-PublicTransportHafas", {
     fadePointForReachableDepartures: 0.25,
     customLineStyles: "",               // Prefix for the name of the custom css file. ex: Leipzig-lines.css (case sensitive)
     showOnlyLineNumbers: false,         // Display only the line number instead of the complete name, i. e. "11" instead of "STR 11"
-    animationSpeed: 1500                // Refresh animation speed in milliseconds
+    animationSpeed: 1_500               // Refresh animation speed in milliseconds
   },
 
   start() {
@@ -151,6 +151,7 @@ Module.register("MMM-PublicTransportHafas", {
         // All other errors
         errorMessage += `${this.error.message}`;
       }
+
       return domBuilder.getSimpleDom(errorMessage);
     }
 
@@ -226,15 +227,17 @@ Module.register("MMM-PublicTransportHafas", {
 
         case "DEPARTURES_FETCHED":
           if (this.config.displayLastUpdate) {
-            this.lastUpdate = Date.now() / 1000; // save the timestamp of the last update to be able to display it
+            this.lastUpdate = Date.now() / 1_000; // save the timestamp of the last update to be able to display it
           }
 
           Log.log(
             `TransportHafas update OK, station : ${
               this.config.stationName
-            } at : ${+dayjs
-              .unix(this.lastUpdate)
-              .format(this.config.displayLastUpdateFormat)}`
+            } at : ${Number(
+              dayjs
+                .unix(this.lastUpdate)
+                .format(this.config.displayLastUpdateFormat)
+            )}`
           );
 
           // reset error object
@@ -291,7 +294,7 @@ Module.register("MMM-PublicTransportHafas", {
 
       this.updatesIntervalID = setInterval(() => {
         this.sendSocketNotification("FETCH_DEPARTURES", this.identifier);
-      }, interval * 1000);
+      }, interval * 1_000);
     }
   },
 

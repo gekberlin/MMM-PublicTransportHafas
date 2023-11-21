@@ -1,6 +1,6 @@
 {
   "name": "mmm-publictransporthafas",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Public transport module for MagicMirror² driven by hafas-client data.",
   "repository": {
     "type": "git",
@@ -8,7 +8,6 @@
   },
   "keywords": [
     "magic mirror",
-    "magic mirror 2",
     "smart mirror",
     "public transport",
     "module"
@@ -36,15 +35,10 @@
   },
   "devDependencies": {
     "eslint": "^8.54.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-json": "^3.1.0",
+    "eslint-config-canonical": "^42.8.0",
     "eslint-plugin-markdownlint": "^0.5.0",
-    "eslint-plugin-prettier": "^5.0.1",
     "lint-staged": "^15.1.0",
     "markdownlint": "^0.32.1",
-    "mega-linter-runner": "^7.5.0",
     "prettier": "^3.1.0",
     "stylelint": "^15.11.0",
     "stylelint-config-standard": "^34.0.0",
@@ -53,7 +47,6 @@
   "scripts": {
     "lint": "eslint . && stylelint **/*.css && prettier --check .",
     "lint:fix": "eslint --fix . && stylelint --fix **/*.css && prettier --write .",
-    "lint:megalinter": "mega-linter-runner --flavor javascript",
     "prepare": "husky install",
     "query_station": "node ./convenience/query_stations.mjs",
     "test": "npm run lint"

@@ -1,11 +1,10 @@
 {
-  "NO_STATION_ID_SET": "Sie haben keine stationID eingegeben!<br>Bitte ergänzen Sie die ID in config.js!",
   "ERROR_ENOTFOUND": "Abfahrtsschnittstelle nicht erreichbar!",
-  "PTH_NO_DEPARTURES": "Es gibt keine erreichbaren Abfahrten.",
-
+  "NO_STATION_ID_SET": "Sie haben keine stationID eingegeben!<br>Bitte ergänzen Sie die ID in config.js!",
+  "PTH_CANCELLED": "Fällt aus",
   "PTH_DEPARTURE_TIME": "Abfahrt",
   "PTH_LINE": "Linie",
-  "PTH_TO": "Nach",
+  "PTH_NO_DEPARTURES": "Es gibt keine erreichbaren Abfahrten.",
   "PTH_PLATFORM": "Steig",
-  "PTH_CANCELLED": "Fällt aus"
+  "PTH_TO": "Nach"
 }

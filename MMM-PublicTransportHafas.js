@@ -144,13 +144,10 @@ Module.register("MMM-PublicTransportHafas", {
       Log.error(this.error.message);
       let errorMessage = `${this.translate("LOADING")}<br><br>⚠️ `;
 
-      if (this.error.code === "ENOTFOUND") {
-        // HAFAS endpoint not available
-        errorMessage += `${this.translate("ERROR_ENOTFOUND")}`;
-      } else {
-        // All other errors
-        errorMessage += `${this.error.message}`;
-      }
+      errorMessage +=
+        this.error.code === "ENOTFOUND"
+          ? this.translate("ERROR_ENOTFOUND") // HAFAS endpoint not available
+          : this.error.message; // All other errors
 
       return domBuilder.getSimpleDom(errorMessage);
     }

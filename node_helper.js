@@ -3,11 +3,11 @@ const Log = require("logger");
 const HafasFetcher = require("./core/HafasFetcher");
 
 module.exports = NodeHelper.create({
-  start() {
+  start () {
     this.departuresFetchers = [];
   },
 
-  socketNotificationReceived(notification, payload) {
+  socketNotificationReceived (notification, payload) {
     switch (notification) {
       case "CREATE_FETCHER":
         this.createFetcher(payload);
@@ -19,41 +19,35 @@ module.exports = NodeHelper.create({
     }
   },
 
-  async createFetcher(config) {
+  async createFetcher (config) {
     let fetcher;
 
     if (typeof this.departuresFetchers[config.identifier] === "undefined") {
       fetcher = new HafasFetcher(config);
       await fetcher.init();
       this.departuresFetchers[config.identifier] = fetcher;
-      Log.info(
-        `Transportation fetcher for station with id '${fetcher.getStationID()}' created.`
-      );
+      Log.info(`Transportation fetcher for station with id '${fetcher.getStationID()}' created.`);
 
       this.sendFetcherLoaded(fetcher);
     } else {
       fetcher = this.departuresFetchers[config.identifier];
-      Log.info(
-        `Using existing transportation fetcher for station id '${fetcher.getStationID()}'.`
-      );
+      Log.info(`Using existing transportation fetcher for station id '${fetcher.getStationID()}'.`);
 
       this.sendFetcherLoaded(fetcher);
     }
   },
 
-  sendFetcherLoaded(fetcher) {
+  sendFetcherLoaded (fetcher) {
     this.sendSocketNotification("FETCHER_INITIALIZED", {
       identifier: fetcher.getIdentifier()
     });
   },
 
-  async fetchDepartures(identifier) {
+  async fetchDepartures (identifier) {
     const fetcher = this.departuresFetchers[identifier];
 
     if (typeof fetcher === "undefined") {
-      Log.log(
-        "MMM-PublicTransportHafas: fetcher is undefined. If this occurs only sporadically, it is not a problem."
-      );
+      Log.log("MMM-PublicTransportHafas: fetcher is undefined. If this occurs only sporadically, it is not a problem.");
     } else {
       try {
         const fetchedDepartures = await fetcher.fetchDepartures();

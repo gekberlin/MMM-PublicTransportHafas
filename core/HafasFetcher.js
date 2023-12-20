@@ -12,7 +12,7 @@ dayjs.extend(isSameOrAfter);
  * @param {Array} arrayB
  * @returns {Array} An array that contains the elements from arrayA that are not contained in arrayB.
  */
-function getArrayDiff(arrayA, arrayB) {
+function getArrayDiff (arrayA, arrayB) {
   return arrayA.filter((element) => !arrayB.includes(element));
 }
 
@@ -33,25 +33,21 @@ module.exports = class HafasFetcher {
    *          maxUnreachableDepartures: *an integer describing how many unreachable departures should be fetched*
    *        }
    */
-  constructor(config) {
-    this.leadTime = 20; // minutes
+  constructor (config) {
+    this.leadTime = 20; // Minutes
     this.config = config;
   }
 
-  async init() {
-    const { createClient } = await import("hafas-client");
-    const { profile } = await import(
-      `hafas-client/p/${this.config.hafasProfile}/index.js`
-    );
+  async init () {
+    const {createClient} = await import("hafas-client");
+    const {profile} = await import(`hafas-client/p/${this.config.hafasProfile}/index.js`);
     this.hafasClient = createClient(
       profile,
       `MMM-PublicTransportHafas v${pjson.version}`
     );
 
     // Possible transportation types given by profil
-    this.possibleTransportationTypes = profile.products.map(
-      (product) => product.id
-    );
+    this.possibleTransportationTypes = profile.products.map((product) => product.id);
 
     // Remove the excluded types from the possible types
     this.config.includedTransportationTypes = getArrayDiff(
@@ -60,30 +56,27 @@ module.exports = class HafasFetcher {
     );
   }
 
-  getIdentifier() {
+  getIdentifier () {
     return this.config.identifier;
   }
 
-  getStationID() {
+  getStationID () {
     return this.config.stationID;
   }
 
-  async fetchDepartures() {
+  async fetchDepartures () {
     const options = {
       direction: this.config.direction,
       duration: this.getTimeInFuture(),
       when: this.getDepartureTime()
     };
-
     const departures = await this.hafasClient.departures(
       this.config.stationID,
       options
     );
     const maxElements =
       this.config.maxReachableDepartures + this.config.maxUnreachableDepartures;
-    let filteredDepartures = this.filterByTransportationTypes(
-      departures.departures
-    );
+    let filteredDepartures = this.filterByTransportationTypes(departures.departures);
 
     filteredDepartures = this.filterByIgnoredLines(filteredDepartures);
     if (this.config.ignoreRelatedStations) {
@@ -99,7 +92,7 @@ module.exports = class HafasFetcher {
     return filteredDepartures;
   }
 
-  getDepartureTime() {
+  getDepartureTime () {
     let departureTime = this.getReachableTime();
 
     if (this.config.maxUnreachableDepartures > 0) {
@@ -109,12 +102,12 @@ module.exports = class HafasFetcher {
     return departureTime;
   }
 
-  getReachableTime() {
+  getReachableTime () {
     return dayjs().add(this.config.timeToStation, "minutes");
   }
 
-  getTimeInFuture() {
-    let { timeInFuture } = this.config;
+  getTimeInFuture () {
+    let {timeInFuture} = this.config;
     if (this.config.maxUnreachableDepartures > 0) {
       timeInFuture += this.leadTime;
     }
@@ -122,17 +115,15 @@ module.exports = class HafasFetcher {
     return timeInFuture;
   }
 
-  filterByTransportationTypes(departures) {
+  filterByTransportationTypes (departures) {
     return departures.filter((departure) => {
-      const index = this.config.includedTransportationTypes.indexOf(
-        departure.line.product
-      );
+      const index = this.config.includedTransportationTypes.indexOf(departure.line.product);
 
       return index !== -1;
     });
   }
 
-  filterByIgnoredLines(departures) {
+  filterByIgnoredLines (departures) {
     return departures.filter((departure) => {
       const line = departure.line.name;
       const index = this.config.ignoredLines.indexOf(line);
@@ -151,13 +142,11 @@ module.exports = class HafasFetcher {
    * @param {any} departures
    * @returns {any} Filtered departures.
    */
-  filterByStopId(departures) {
-    return departures.filter(
-      (departure) => departure.stop.id === this.config.stationID
-    );
+  filterByStopId (departures) {
+    return departures.filter((departure) => departure.stop.id === this.config.stationID);
   }
 
-  departuresMarkedWithReachability(departures) {
+  departuresMarkedWithReachability (departures) {
     return departures.map((departure) => {
       this.departure = departure;
       this.departure.isReachable = this.isReachable(departure);
@@ -165,11 +154,9 @@ module.exports = class HafasFetcher {
     });
   }
 
-  departuresRemovedSurplusUnreachableDepartures(departures) {
+  departuresRemovedSurplusUnreachableDepartures (departures) {
     // Get all unreachable departures
-    const unreachableDepartures = departures.filter(
-      (departure) => !departure.isReachable
-    );
+    const unreachableDepartures = departures.filter((departure) => !departure.isReachable);
 
     // Adjust lead time for next request
     this.adjustLeadTime(unreachableDepartures);
@@ -180,9 +167,7 @@ module.exports = class HafasFetcher {
     );
 
     // Get all reachable departures
-    const reachableDepartures = departures.filter(
-      (departure) => departure.isReachable
-    );
+    const reachableDepartures = departures.filter((departure) => departure.isReachable);
 
     // Output reachableDepartures for debugging
     if (config.logLevel.includes("DEBUG")) {
@@ -195,7 +180,7 @@ module.exports = class HafasFetcher {
     return result;
   }
 
-  adjustLeadTime(unreachableDepartures) {
+  adjustLeadTime (unreachableDepartures) {
     /**
      * This method dynamically adjusts the lead time. This is only relevant if
      * 'this.config.maxUnreachableDepartures' is greater than 0. The dynamic
@@ -209,7 +194,7 @@ module.exports = class HafasFetcher {
     }
   }
 
-  isReachable(departure) {
+  isReachable (departure) {
     return dayjs(departure.when).isSameOrAfter(this.getReachableTime());
   }
 };

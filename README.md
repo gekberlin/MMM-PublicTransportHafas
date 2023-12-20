@@ -51,6 +51,7 @@ For more information see the [Configuration](#configuration) section.
 Just clone the module into your modules folder of your MagicMirror² and execute `npm install --omit=dev` in the module’s directory:
 
 ```bash
+cd ~/MagicMirror/modules/MMM-PublicTransportHafas
 git clone https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas
 cd MMM-PublicTransportHafas
 npm install --omit=dev
@@ -61,6 +62,7 @@ npm install --omit=dev
 Go to the module’s folder inside MagicMirror modules folder and pull the latest version from GitHub and install:
 
 ```bash
+cd ~/MagicMirror/modules/MMM-PublicTransportHafas
 git pull
 npm install --omit=dev
 ```
@@ -72,7 +74,7 @@ You need the `stationId` for the station whose departures should be displayed.
 Here's how to find out the `stationId`:
 
 1. You have to be in the modules folder (`MagicMirror/modules/MMM-PublicTransportHafas`).
-2. Then run the following command: `npm run query_station`.
+2. Then run the following command: `npm run query`.
 3. Enter a station name. It is useful to enter a city name too since the system knows a lot of stations even outside Germany.
 4. The result could contain one or more possible stations with valid IDs.
 5. Use the appropriate ID as `stationId` in the configuration of the module.
@@ -104,7 +106,7 @@ Stops found for 'Leipzig, Wilhelm-Leuschner-Platz':
 By default, the module uses the `db` profile of the `hafas-client`. In some cases it can be advantageous to use a different profile - e.g. the default profile often does not provide platform information from local transport companies. [Here](https://github.com/public-transport/hafas-client/blob/master/p/readme.md) you can find the name of all supported interfaces. Just add the name as a parameter to the command. Like `sbb` for the profile of Swiss Railways.
 
 ```bash
-npm run query_station sbb
+npm run query sbb
 ```
 
 ## Configuration

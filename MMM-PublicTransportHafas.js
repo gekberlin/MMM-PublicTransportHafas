@@ -1,14 +1,15 @@
+/* eslint-disable @stylistic/no-multi-spaces */
 /* global dayjs PTHAFASDomBuilder Module Log config */
 
-// UserPresence Management (PIR sensor)
-// (This variable must currently still be declared with var, as several modules use this
-// variable. If someone wants to change this, they would have to adapt the other modules as well.)
+/*
+ * UserPresence Management (PIR sensor)
+ * (The variable UserPresence must currently still be declared with var, as several modules use this
+ * variable. If someone wants to change this, they would have to adapt the other modules as well.)
+ */
 // eslint-disable-next-line no-var
 var UserPresence = true; // true by default, so no impact for user without a PIR sensor
 
 Module.register("MMM-PublicTransportHafas", {
-  // default values
-  // prettier-ignore
   defaults: {
     // Module misc
     name: "MMM-PublicTransportHafas",
@@ -38,7 +39,7 @@ Module.register("MMM-PublicTransportHafas", {
     showColoredLineSymbols: true,       // Want colored line symbols?
     useColorForRealtimeInfo: true,      // Want colored real time information (timeToStation, early)?
     showAbsoluteTime: true,             // How should the departure time be displayed? "15:10" (absolute) or "in 5 minutes" (relative)
-    showRelativeTimeOnlyUnder: 10*60*1_000,  // Display the time only relatively if the departure takes place in less than 10 minutes (600000 milliseconds). The value is only relevant if showAbsoluteTime: false.
+    showRelativeTimeOnlyUnder: 10 * 60 * 1000,  // Display the time only relatively if the departure takes place in less than 10 minutes (600000 milliseconds). The value is only relevant if showAbsoluteTime: false.
     showTableHeaders: true,             // Show table headers?
     showTableHeadersAsSymbols: true,    // Table Headers as symbols or written?
     showWarningRemarks: true,           // Show warning remarks?
@@ -53,10 +54,8 @@ Module.register("MMM-PublicTransportHafas", {
     animationSpeed: 1_500               // Refresh animation speed in milliseconds
   },
 
-  start() {
-    Log.info(
-      `Starting module: ${this.name} with identifier: ${this.identifier}`
-    );
+  start () {
+    Log.info(`Starting module: ${this.name} with identifier: ${this.identifier}`);
 
     this.ModulePublicTransportHafasHidden = false; // By default we display the module (if no carousel or other module)
     this.updatesIntervalID = 0; // To stop and start auto update for each module instance
@@ -95,30 +94,30 @@ Module.register("MMM-PublicTransportHafas", {
     dayjs.locale(config.language);
   },
 
-  suspend() {
+  suspend () {
     // Core function called when the module is hidden
     this.ModulePublicTransportHafasHidden = true; // Module hidden
     // Log.log("Function suspend - Module PublicTransportHafas is hidden " + this.config.stationName);
-    this.GestionUpdateIntervalHafas(); // Call the function which manages all the cases
+    this.gestionUpdateIntervalHafas(); // Call the function which manages all the cases
   },
 
-  resume() {
+  resume () {
     // Core function called when the module is displayed
     this.ModulePublicTransportHafasHidden = false;
     // Log.log("Function working - Module PublicTransportHafas is displayed " + this.config.stationName);
-    this.GestionUpdateIntervalHafas();
+    this.gestionUpdateIntervalHafas();
   },
 
-  notificationReceived(notification, payload) {
+  notificationReceived (notification, payload) {
     if (notification === "USER_PRESENCE") {
       // Notification sent by the MMM-PIR-Sensor module. See its doc.
       // Log.log("NotificationReceived USER_PRESENCE = " + payload);
       UserPresence = payload;
-      this.GestionUpdateIntervalHafas();
+      this.gestionUpdateIntervalHafas();
     }
   },
 
-  GestionUpdateIntervalHafas() {
+  gestionUpdateIntervalHafas () {
     if (
       UserPresence === true &&
       this.ModulePublicTransportHafasHidden === false
@@ -136,7 +135,7 @@ Module.register("MMM-PublicTransportHafas", {
     }
   },
 
-  getDom() {
+  getDom () {
     const domBuilder = new PTHAFASDomBuilder(this.config);
 
     // Error handling
@@ -171,7 +170,7 @@ Module.register("MMM-PublicTransportHafas", {
       noDeparturesMessage
     );
 
-    // display the update time at the end, if defined so by the user config
+    // Display the update time at the end, if defined so by the user config
     if (this.config.displayLastUpdate) {
       const updateinfo = document.createElement("div");
       updateinfo.className = "xsmall light align-left";
@@ -184,7 +183,7 @@ Module.register("MMM-PublicTransportHafas", {
     return wrapper;
   },
 
-  getStyles() {
+  getStyles () {
     const styles = [this.file("css/styles.css"), "font-awesome.css"];
 
     if (this.config.customLineStyles !== "") {
@@ -195,7 +194,7 @@ Module.register("MMM-PublicTransportHafas", {
     return styles;
   },
 
-  getScripts() {
+  getScripts () {
     return [
       this.file("node_modules/dayjs/dayjs.min.js"),
       this.file("node_modules/dayjs/plugin/localizedFormat.js"),
@@ -206,14 +205,14 @@ Module.register("MMM-PublicTransportHafas", {
     ];
   },
 
-  getTranslations() {
+  getTranslations () {
     return {
       en: "translations/en.json",
       de: "translations/de.json"
     };
   },
 
-  socketNotificationReceived(notification, payload) {
+  socketNotificationReceived (notification, payload) {
     if (this.isForThisStation(payload)) {
       switch (notification) {
         case "FETCHER_INITIALIZED":
@@ -224,20 +223,16 @@ Module.register("MMM-PublicTransportHafas", {
 
         case "DEPARTURES_FETCHED":
           if (this.config.displayLastUpdate) {
-            this.lastUpdate = Date.now() / 1_000; // save the timestamp of the last update to be able to display it
+            this.lastUpdate = Date.now() / 1_000; // Save the timestamp of the last update to be able to display it
           }
 
-          Log.log(
-            `TransportHafas update OK, station : ${
-              this.config.stationName
-            } at : ${Number(
-              dayjs
-                .unix(this.lastUpdate)
-                .format(this.config.displayLastUpdateFormat)
-            )}`
-          );
+          Log.log(`TransportHafas update OK, station : ${
+            this.config.stationName
+          } at : ${Number(dayjs
+            .unix(this.lastUpdate)
+            .format(this.config.displayLastUpdateFormat))}`);
 
-          // reset error object
+          // Reset error object
           this.error = {};
           this.departures = payload.departures;
           this.updateDom(this.config.animationSpeed);
@@ -254,11 +249,11 @@ Module.register("MMM-PublicTransportHafas", {
     }
   },
 
-  isForThisStation(payload) {
+  isForThisStation (payload) {
     return payload.identifier === this.identifier;
   },
 
-  sanitzeConfig() {
+  sanitzeConfig () {
     if (this.config.updatesEvery < 30) {
       this.config.updatesEvery = 30;
     }
@@ -280,14 +275,14 @@ Module.register("MMM-PublicTransportHafas", {
     }
   },
 
-  startFetchingLoop(interval) {
-    // start immediately ...
+  startFetchingLoop (interval) {
+    // Start immediately ...
     this.sendSocketNotification("FETCH_DEPARTURES", this.identifier);
 
     // ... and then repeat in the given interval
 
     if (this.updatesIntervalID === 0) {
-      // if this instance as no auto update defined, then we create one. Otherwise : nothing.
+      // If this instance as no auto update defined, then we create one. Otherwise : nothing.
 
       this.updatesIntervalID = setInterval(() => {
         this.sendSocketNotification("FETCH_DEPARTURES", this.identifier);
@@ -295,7 +290,7 @@ Module.register("MMM-PublicTransportHafas", {
     }
   },
 
-  hasErrors() {
+  hasErrors () {
     return Object.keys(this.error).length > 0;
   }
 });

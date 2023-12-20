@@ -5,11 +5,11 @@ dayjs.extend(window.dayjs_plugin_localizedFormat);
 
 // eslint-disable-next-line no-unused-vars
 class PTHAFASTableBodyBuilder {
-  constructor(config) {
+  constructor (config) {
     this.config = config;
   }
 
-  getDeparturesTableBody(departures, noDepartureMessage) {
+  getDeparturesTableBody (departures, noDepartureMessage) {
     const tBody = document.createElement("tbody");
     tBody.className = "light";
 
@@ -21,9 +21,7 @@ class PTHAFASTableBodyBuilder {
     }
 
     const reachableCount = departures.length;
-    const unreachableCount = departures.filter(
-      (departure) => !departure.isReachable
-    ).length;
+    const unreachableCount = departures.filter((departure) => !departure.isReachable).length;
 
     for (const [index, departure] of departures.entries()) {
       const row = this.getDeparturesTableRow(
@@ -56,20 +54,18 @@ class PTHAFASTableBodyBuilder {
     return tBody;
   }
 
-  insertRulerIfNecessary(tBody, departure, nextDeparture, noDepartureMessage) {
+  insertRulerIfNecessary (tBody, departure, nextDeparture, noDepartureMessage) {
     if (nextDeparture && !departure.isReachable && nextDeparture.isReachable) {
       tBody.appendChild(this.getRulerRow());
     }
 
     if (!departure.isReachable && !nextDeparture) {
       tBody.appendChild(this.getRulerRow());
-      tBody.appendChild(
-        this.getDeparturesTableNoDeparturesRow(noDepartureMessage)
-      );
+      tBody.appendChild(this.getDeparturesTableNoDeparturesRow(noDepartureMessage));
     }
   }
 
-  getTableCell(content, cssClass = "") {
+  getTableCell (content, cssClass = "") {
     this.cell = document.createElement("td");
     this.cell.className = cssClass;
 
@@ -82,7 +78,7 @@ class PTHAFASTableBodyBuilder {
     return this.cell;
   }
 
-  getDeparturesTableNoDeparturesRow(noDepartureMessage) {
+  getDeparturesTableNoDeparturesRow (noDepartureMessage) {
     this.row = document.createElement("tr");
     this.row.className = "dimmed";
 
@@ -95,7 +91,7 @@ class PTHAFASTableBodyBuilder {
     return this.row;
   }
 
-  getRemarksTableRow(departure) {
+  getRemarksTableRow (departure) {
     const row = document.createElement("tr");
     row.className = "";
 
@@ -128,7 +124,7 @@ class PTHAFASTableBodyBuilder {
     return row;
   }
 
-  getDeparturesTableRow(departure, index, departuresCount, unreachableCount) {
+  getDeparturesTableRow (departure, index, departuresCount, unreachableCount) {
     const row = document.createElement("tr");
     row.className = "bright";
 
@@ -152,20 +148,24 @@ class PTHAFASTableBodyBuilder {
     return row;
   }
 
-  getCell(key, departure) {
+  getCell (key, departure) {
     let cell;
 
     switch (key) {
       case "time": {
         this.time = departure.when;
         // Use planned time if canceled
-        if (departure.canceled === true) this.time = departure.plannedWhen;
+        if (departure.canceled === true) {
+          this.time = departure.plannedWhen;
+        }
 
         // Get time cell
         cell = this.getTimeCell(this.time, departure.delay);
 
         // Add class if canceled
-        if (departure.canceled === true) cell.className += " mmm-pth-canceled";
+        if (departure.canceled === true) {
+          cell.className += " mmm-pth-canceled";
+        }
 
         break;
       }
@@ -181,9 +181,13 @@ class PTHAFASTableBodyBuilder {
       }
 
       case "platform": {
-        let { platform } = departure;
-        if (platform === null) platform = departure.plannedPlatform;
-        if (platform === null) platform = "";
+        let {platform} = departure;
+        if (platform === null) {
+          platform = departure.plannedPlatform;
+        }
+        if (platform === null) {
+          platform = "";
+        }
         cell = this.getPlatformCell(platform);
         break;
       }
@@ -192,9 +196,8 @@ class PTHAFASTableBodyBuilder {
     return cell;
   }
 
-  getTimeCell(departure, delay) {
+  getTimeCell (departure, delay) {
     const time = this.getDisplayDepartureTime(departure, delay);
-
     const cell = document.createElement("td");
 
     if (dayjs(departure).isValid()) {
@@ -212,14 +215,16 @@ class PTHAFASTableBodyBuilder {
     return cell;
   }
 
-  getDelaySpan(delay) {
+  getDelaySpan (delay) {
     const delaySpan = document.createElement("span");
     delaySpan.innerText = this.getDelay(delay);
 
     let cssClass = "dimmed";
 
     if (this.config.useColorForRealtimeInfo && typeof delay === "number") {
-      cssClass = delay > 0 ? "mmm-pth-has-delay" : "mmm-pth-to-early";
+      cssClass = delay > 0
+        ? "mmm-pth-has-delay"
+        : "mmm-pth-to-early";
     }
 
     delaySpan.className = `mmm-pth-delay ${cssClass}`;
@@ -227,17 +232,19 @@ class PTHAFASTableBodyBuilder {
     return delaySpan;
   }
 
-  getDelay(delay) {
+  getDelay (delay) {
     this.delayString = "+?";
     if (typeof delay === "number") {
-      const sign = delay < 0 ? "-" : "+";
+      const sign = delay < 0
+        ? "-"
+        : "+";
       this.delayString = sign + delay / 60;
     }
 
     return this.delayString;
   }
 
-  getDisplayDepartureTime(when, delay) {
+  getDisplayDepartureTime (when, delay) {
     let time = dayjs(when);
 
     if (this.config.showAbsoluteTime) {
@@ -252,7 +259,7 @@ class PTHAFASTableBodyBuilder {
     return time.fromNow();
   }
 
-  getLineId(lineName) {
+  getLineId (lineName) {
     this.lineId = lineName;
     if (lineName.search(" ") === -1) {
       const lineNameWithoutSpaces = lineName.replaceAll(/\s/gu, "");
@@ -269,7 +276,7 @@ class PTHAFASTableBodyBuilder {
     return this.lineId;
   }
 
-  getLineCell(lineName) {
+  getLineCell (lineName) {
     let line;
 
     if (this.config.showOnlyLineNumbers) {
@@ -285,7 +292,7 @@ class PTHAFASTableBodyBuilder {
     return this.getTableCell(lineDiv);
   }
 
-  getLineCssClass(lineName) {
+  getLineCssClass (lineName) {
     if (this.config.showColoredLineSymbols) {
       return this.getColoredCssClass(lineName);
     }
@@ -304,7 +311,7 @@ class PTHAFASTableBodyBuilder {
    * @param  {string} lineName    The line name as it was delivered by the HAFAS API.
    * @returns {string} product     The product ('RB', 'S', 'U', ...).
    */
-  getProduct(lineName) {
+  getProduct (lineName) {
     this.product = lineName;
     if (lineName.search(" ") === -1) {
       const lineNameWithoutSpaces = lineName.replaceAll(/\s/gu, "");
@@ -329,7 +336,7 @@ class PTHAFASTableBodyBuilder {
    * @param  {string} lineName     The linename as it was delivered by the HAFAS API.
    * @returns {string} classNames   Series of class names
    */
-  getColoredCssClass(lineName) {
+  getColoredCssClass (lineName) {
     let classNames = "mmm-pth-sign";
     const product = this.getProduct(lineName);
     const DBProducts = ["IC", "ICE", "RE", "RB", "S"];
@@ -352,14 +359,14 @@ class PTHAFASTableBodyBuilder {
     return classNames;
   }
 
-  getDirectionCell(direction) {
+  getDirectionCell (direction) {
     const truncatePosition = 26;
     let content = this.getProcessedDirection(direction);
     let className = "mmm-pth-direction-cell";
 
     if (
       this.config.marqueeLongDirections &&
-      content.length > truncatePosition
+        content.length > truncatePosition
     ) {
       content = document.createElement("span");
       content.innerText = this.getProcessedDirection(direction);
@@ -373,7 +380,7 @@ class PTHAFASTableBodyBuilder {
     return this.getTableCell(content, className);
   }
 
-  getProcessedDirection(direction) {
+  getProcessedDirection (direction) {
     const replacements = this.config.replaceInDirections;
     let processed = direction;
 
@@ -384,12 +391,12 @@ class PTHAFASTableBodyBuilder {
     return processed;
   }
 
-  getPlatformCell(platform) {
+  getPlatformCell (platform) {
     const className = "mmm-pth-platform-cell mmm-pth-text-center";
     return this.getTableCell(platform, className);
   }
 
-  getRowOpacity(index, departuresCount) {
+  getRowOpacity (index, departuresCount) {
     if (!this.config.fadeReachableDepartures) {
       return 1;
     }
@@ -399,8 +406,7 @@ class PTHAFASTableBodyBuilder {
     let opacity = 1;
     const startOpacity = 0.8;
     const endOpacity = 0.2;
-    const opacityDiff =
-      (startOpacity - endOpacity) / (departuresCount - threshold);
+    const opacityDiff = (startOpacity - endOpacity) / (departuresCount - threshold);
 
     if (index > threshold) {
       const fadingIndex = index - threshold;
@@ -411,7 +417,7 @@ class PTHAFASTableBodyBuilder {
     return opacity;
   }
 
-  getUnreachableRowOpacity(index, count) {
+  getUnreachableRowOpacity (index, count) {
     if (!this.config.fadeUnreachableDepartures) {
       return 1;
     }
@@ -427,7 +433,7 @@ class PTHAFASTableBodyBuilder {
     return startOpacity + opacityDiff * index;
   }
 
-  getRulerRow() {
+  getRulerRow () {
     this.row = document.createElement("tr");
     this.cell = document.createElement("td");
 

@@ -1,17 +1,11 @@
 const globals = require("globals");
-const eslintPluginNode = require("eslint-plugin-n");
-const eslintPluginEslintPluginRecommended = require("eslint-plugin-eslint-plugin/configs/recommended");
-const importPlugin = require("eslint-plugin-import");
 const {configs: eslintConfigs} = require("@eslint/js");
-const stylistic = require("@stylistic/eslint-plugin");
+const eslintPluginImport = require("eslint-plugin-import");
+const eslintPluginStylistic = require("@stylistic/eslint-plugin");
 
-module.exports = [
-  eslintConfigs.all,
-  eslintPluginNode.configs["flat/recommended"],
-  eslintPluginEslintPluginRecommended,
-  stylistic.configs["all-flat"],
+const config = [
   {
-    files: ["**/*.cjs", "**/*.js"],
+    files: ["**/*.js"],
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -19,12 +13,15 @@ module.exports = [
       }
     },
     plugins: {
-      import: importPlugin
+      ...eslintPluginStylistic.configs["all-flat"].plugins,
+      import: eslintPluginImport
     },
     rules: {
-      ...importPlugin.configs.recommended.rules,
-      "consistent-this": "off",
+      ...eslintConfigs.all.rules,
+      ...eslintPluginImport.configs.recommended.rules,
+      ...eslintPluginStylistic.configs["all-flat"].rules,
       "capitalized-comments": "off",
+      "consistent-this": "off",
       "default-case": "off",
       "func-style": "off",
       "init-declarations": "off",
@@ -35,15 +32,12 @@ module.exports = [
       "max-statements": ["error", 25],
       "multiline-comment-style": "off",
       "no-await-in-loop": "off",
-      "n/no-missing-require": "off",
-      "n/no-unpublished-require": "off",
       "no-inline-comments": "off",
       "no-magic-numbers": "off",
       "no-undef": "warn",
       "no-ternary": "off",
       "one-var": "off",
       "sort-keys": "off",
-      "sort-vars": "off",
       strict: "off",
       "@stylistic/array-element-newline": ["error", "consistent"],
       "@stylistic/dot-location": ["error", "property"],
@@ -63,7 +57,12 @@ module.exports = [
       },
       sourceType: "module"
     },
+    plugins: {
+      ...eslintPluginStylistic.configs["all-flat"].plugins
+    },
     rules: {
+      ...eslintConfigs.all.rules,
+      ...eslintPluginStylistic.configs["all-flat"].rules,
       "func-style": "off",
       "max-lines-per-function": ["error", 100],
       "no-magic-numbers": "off",
@@ -72,3 +71,22 @@ module.exports = [
     }
   }
 ];
+
+/*
+ * Set debug to true for testing purposes.
+ * Since some plugins have not yet been optimized for the flat config,
+ * we will be able to optimize this file in the future. It can be helpful
+ * to write the ESLint config to a file and compare it after changes.
+ */
+const debug = false;
+
+if (debug === true) {
+  const FileSystem = require("fs");
+  FileSystem.writeFile("eslint-config-DEBUG.json", JSON.stringify(config, null, 2), (error) => {
+    if (error) {
+      throw error;
+    }
+  });
+}
+
+module.exports = config;

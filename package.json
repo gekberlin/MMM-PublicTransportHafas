@@ -34,12 +34,10 @@
     "husky": "^8.0.3"
   },
   "devDependencies": {
-    "@eslint/js": "^8.56.0",
+    "@eslint/js": "latest",
     "@stylistic/eslint-plugin": "latest",
-    "eslint-plugin-eslint-plugin": "latest",
+    "eslint": "^8.56.0",
     "eslint-plugin-import": "latest",
-    "eslint-plugin-markdownlint": "latest",
-    "eslint-plugin-n": "latest",
     "globals": "latest",
     "lint-staged": "latest",
     "markdownlint-cli": "latest",
@@ -49,7 +47,7 @@
     "stylelint-prettier": "latest"
   },
   "scripts": {
-    "lint": "eslint . && stylelint **/*.css  && markdownlint . --ignore node_modules && prettier --check .",
+    "lint": "eslint . && stylelint **/*.css && markdownlint . --ignore node_modules && prettier --check .",
     "lint:fix": "eslint . --fix && stylelint **/*.css --fix && markdownlint . --ignore node_modules --fix && prettier --write .",
     "prepare": "husky install",
     "query": "node ./convenience/query_stations.mjs",

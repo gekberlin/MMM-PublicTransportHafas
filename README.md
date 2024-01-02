@@ -5,10 +5,8 @@
 [![GitHub forks](https://img.shields.io/github/forks/KristjanESPERANTO/mmm-publictransporthafas)](https://github.com/KristjanESPERANTO/mmm-publictransporthafas/network)
 [![GitHub stars](https://img.shields.io/github/stars/KristjanESPERANTO/mmm-publictransporthafas)](https://github.com/KristjanESPERANTO/mmm-publictransporthafas/stargazers)
 [![GitHub license](https://img.shields.io/github/license/KristjanESPERANTO/mmm-publictransporthafas?style=plastic)](https://github.com/KristjanESPERANTO/mmm-publictransporthafas/blob/master/LICENSE)
-[![GitHub Super-Linter](https://github.com/KristjanESPERANTO/mmm-publictransporthafas/workflows/Super-Linter/badge.svg)](https://github.com/marketplace/actions/super-linter)
-[![MegaLinter](https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas/workflows/MegaLinter/badge.svg?branch=main)](https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas/actions?query=workflow%3AMegaLinter+branch%3Amain)
 
-**MMM-PublicTransportHafas is a module for [MagicMirror²](https://github.com/MichMich/MagicMirror) to display public transport departures.**
+**MMM-PublicTransportHafas is a module for [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror) to display public transport departures.**
 
 - [Description](#description)
 - [How it works](#how-it-works)
@@ -241,11 +239,11 @@ Thanks to @AgP42 for this functionality!
 
 ## Special Thanks
 
-- [Michael Teeuw](https://github.com/MichMich) for creating the inspiring project [MagicMirror²](https://github.com/MichMich/MagicMirror). You can sponsor him and the MagicMirror² project through [GitHub](https://github.com/sponsors/MichMich).
+- [Michael Teeuw](https://github.com/MichMich) for creating the inspiring project [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror). You can sponsor the MagicMirror² project through [GitHub](https://magicmirror.builders/#donate).
 - [Jannis Redmann](https://github.com/derhuerst) for creating the most useful [hafas-client](https://github.com/derhuerst/hafas-client) library which provides the data for this module. You can sponsor him and a lot of his public transport projects through [GitHub](https://github.com/sponsors/derhuerst) or [Patreon](https://www.patreon.com/derhuerst).
 - [deg0nz](https://github.com/deg0nz) for creating the [MMM-PublicTransportBerlin](https://github.com/deg0nz/MMM-PublicTransportBerlin) module, on which this one is originally based.
 - [Ray Wojciechowski](https://github.com/raywo) for initiating this module and maintaining it until 2018.
-- The community of magicmirror.builders for help in the development process and all contributors for finding and fixing errors in this module.
+- The community of MagicMirror² for help in the development process and all contributors for finding and fixing errors in this module.
 
 ## Contributing
 

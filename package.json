@@ -30,8 +30,7 @@
   },
   "dependencies": {
     "dayjs": "^1.11.10",
-    "hafas-client": "^6.2.1",
-    "husky": "^8.0.3"
+    "hafas-client": "^6.2.1"
   },
   "devDependencies": {
     "@eslint/js": "^8.56.0",
@@ -39,10 +38,11 @@
     "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.29.1",
     "globals": "^13.24.0",
+    "husky": "^9.0.6",
     "lint-staged": "^15.2.0",
     "markdownlint-cli": "^0.38.0",
     "prettier": "^3.2.4",
-    "stylelint": "^16.1.0",
+    "stylelint": "^16.2.0",
     "stylelint-config-standard": "^36.0.0",
     "stylelint-prettier": "^5.0.0"
   },

@@ -41,14 +41,14 @@
     "husky": "^9.0.10",
     "lint-staged": "^15.2.1",
     "markdownlint-cli": "^0.39.0",
-    "prettier": "^3.2.4",
+    "prettier": "^3.2.5",
     "stylelint": "^16.2.1",
     "stylelint-config-standard": "^36.0.0",
     "stylelint-prettier": "^5.0.0"
   },
   "scripts": {
-    "lint": "eslint . && stylelint **/*.css && markdownlint . --ignore node_modules && prettier --check .",
-    "lint:fix": "eslint . --fix && stylelint **/*.css --fix && markdownlint . --ignore node_modules --fix && prettier --write .",
+    "lint": "eslint . && stylelint **/*.css && markdownlint . --ignore node_modules && prettier . --check",
+    "lint:fix": "eslint . --fix && stylelint **/*.css --fix && markdownlint . --ignore node_modules --fix && prettier . --write",
     "prepare": "husky",
     "query": "node ./convenience/query_stations.mjs",
     "test": "npm run lint"

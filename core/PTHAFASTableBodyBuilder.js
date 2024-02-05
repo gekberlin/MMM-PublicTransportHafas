@@ -347,8 +347,7 @@ class PTHAFASTableBodyBuilder {
     }
 
     if (
-      ignoreShowOnlyLineNumbers.includes(product) &&
-      this.config.showOnlyLineNumbers
+      ignoreShowOnlyLineNumbers.includes(product) && this.config.showOnlyLineNumbers
     ) {
       classNames += ` mmm-pth-${product.toLowerCase()}-with-product-name`;
     }
@@ -365,8 +364,7 @@ class PTHAFASTableBodyBuilder {
     let className = "mmm-pth-direction-cell";
 
     if (
-      this.config.marqueeLongDirections &&
-        content.length > truncatePosition
+      this.config.marqueeLongDirections && content.length > truncatePosition
     ) {
       content = document.createElement("span");
       content.innerText = this.getProcessedDirection(direction);
@@ -401,8 +399,7 @@ class PTHAFASTableBodyBuilder {
       return 1;
     }
 
-    const threshold =
-      departuresCount * this.config.fadePointForReachableDepartures;
+    const threshold = departuresCount * this.config.fadePointForReachableDepartures;
     let opacity = 1;
     const startOpacity = 0.8;
     const endOpacity = 0.2;

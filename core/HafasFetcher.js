@@ -74,8 +74,7 @@ module.exports = class HafasFetcher {
       this.config.stationID,
       options
     );
-    const maxElements =
-      this.config.maxReachableDepartures + this.config.maxUnreachableDepartures;
+    const maxElements = this.config.maxReachableDepartures + this.config.maxUnreachableDepartures;
     let filteredDepartures = this.filterByTransportationTypes(departures.departures);
 
     filteredDepartures = this.filterByIgnoredLines(filteredDepartures);
@@ -83,10 +82,8 @@ module.exports = class HafasFetcher {
       filteredDepartures = this.filterByStopId(filteredDepartures);
     }
 
-    filteredDepartures =
-      this.departuresMarkedWithReachability(filteredDepartures);
-    filteredDepartures =
-      this.departuresRemovedSurplusUnreachableDepartures(filteredDepartures);
+    filteredDepartures = this.departuresMarkedWithReachability(filteredDepartures);
+    filteredDepartures = this.departuresRemovedSurplusUnreachableDepartures(filteredDepartures);
     filteredDepartures = filteredDepartures.slice(0, maxElements);
 
     return filteredDepartures;

@@ -46,13 +46,13 @@ For more information see the [Configuration](#configuration) section.
 
 ## Installation
 
-Just clone the module into your modules folder of your MagicMirror² and execute `npm install --omit=dev` in the module’s directory:
+Just clone the module into your modules folder of your MagicMirror² and execute `npm install` in the module’s directory:
 
 ```bash
 cd ~/MagicMirror/modules/MMM-PublicTransportHafas
 git clone https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas
 cd MMM-PublicTransportHafas
-npm install --omit=dev
+npm install
 ```
 
 ## Update

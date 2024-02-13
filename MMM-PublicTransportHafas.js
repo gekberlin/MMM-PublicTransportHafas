@@ -13,7 +13,7 @@ Module.register("MMM-PublicTransportHafas", {
   defaults: {
     // Module misc
     name: "MMM-PublicTransportHafas",
-    hafasProfile: "db",                 // Which HAFAS profile should be used?
+    hafasProfile: "bvg",                 // Which HAFAS profile should be used?
     hidden: false,
     updatesEvery: 120,                  // How often should the table be updated in s?
 
@@ -119,7 +119,8 @@ Module.register("MMM-PublicTransportHafas", {
 
   gestionUpdateIntervalHafas () {
     if (
-      UserPresence === true && this.ModulePublicTransportHafasHidden === false
+      UserPresence === true &&
+      this.ModulePublicTransportHafasHidden === false
     ) {
       // Make sure to have a user present in front of the screen (PIR sensor) and that the module is displayed
       // Log.log(this.config.stationName + " is displayed and user present! Update it");
@@ -142,9 +143,10 @@ Module.register("MMM-PublicTransportHafas", {
       Log.error(this.error.message);
       let errorMessage = `${this.translate("LOADING")}<br><br>⚠️ `;
 
-      errorMessage += this.error.code === "ENOTFOUND"
-        ? this.translate("ERROR_ENOTFOUND") // HAFAS endpoint not available
-        : this.error.message; // All other errors
+      errorMessage +=
+        this.error.code === "ENOTFOUND"
+          ? this.translate("ERROR_ENOTFOUND") // HAFAS endpoint not available
+          : this.error.message; // All other errors
 
       return domBuilder.getSimpleDom(errorMessage);
     }

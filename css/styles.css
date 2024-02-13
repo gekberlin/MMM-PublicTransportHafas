@@ -29,6 +29,11 @@ them from the MagicMirror² core system and other modules.
   text-decoration: line-through;
 }
 
+.mmm-pth-realtime {
+  font-style: italic;
+  text-align: left;
+}
+
 .mmm-pth-direction-cell {
   max-width: 24ch;
   min-width: 16ch;

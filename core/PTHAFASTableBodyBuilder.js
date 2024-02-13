@@ -355,17 +355,16 @@ class PTHAFASTableBodyBuilder {
     }
 
     if (
-      ignoreShowOnlyLineNumbers.includes(product) &&
-      this.config.showOnlyLineNumbers
+      ignoreShowOnlyLineNumbers.includes(product) && this.config.showOnlyLineNumbers
     ) {
       classNames += ` mmm-pth-${product.toLowerCase()}-with-product-name`;
     }
 
-    classNames += ` ${product.toLowerCase()}`;
-    classNames += ` ${lineName.replaceAll(/\s/gu, "").toLowerCase()}`;
+    classNames += ` line-${lineName.replaceAll(/\s/gu, "").toLowerCase()} `;
 
     return classNames;
   }
+
 
   getDirectionCell (direction) {
     const truncatePosition = 26;

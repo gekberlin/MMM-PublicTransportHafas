@@ -23,6 +23,7 @@ them from the MagicMirror² core system and other modules.
 
 .mmm-pth-time-cell {
   text-align: left;
+  color: rgb(138 130 130);
 }
 
 .mmm-pth-canceled {
@@ -32,6 +33,7 @@ them from the MagicMirror² core system and other modules.
 .mmm-pth-realtime {
   font-style: italic;
   text-align: left;
+  color: white !important;
 }
 
 .mmm-pth-direction-cell {
@@ -43,6 +45,7 @@ them from the MagicMirror² core system and other modules.
   text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: rgb(138 130 130);
 }
 
 .mmm-pth-platform-cell {

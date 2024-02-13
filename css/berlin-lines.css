@@ -119,93 +119,93 @@
   All tram lines have a diffrent color code and a white text color.
   The width of the line symbol is pulled from the styles.css of MMM-PublicTransportHafas/css.
   It is equal to the font size. This will result in a square symbol.
-  Source: https://de.wikipedia.org/wiki/Stra%C3%9Fenbahn_Berlin#Linien%C3%BCbersicht;
+  Source: https://de.wikipedia.org/wiki/line_a%C3%9Fenbahn_Berlin#Linien%C3%BCbersicht;
  */
 
-.m1 {
+.line-m1 {
   background-color: #78b7e4;
 }
 
-.m2 {
+.line-m2 {
   background-color: #88b744;
 }
 
-.m4 {
+.line-m4 {
   background-color: #ba2d23;
 }
 
-.m5 {
+.line-m5 {
   background-color: #bf8c4a;
 }
 
-.m6 {
+.line-m6 {
   background-color: #235690;
 }
 
-.m8 {
+.line-m8 {
   background-color: #de792e;
 }
 
-.m10 {
+.line-m10 {
   background-color: #357943;
 }
 
-.m13 {
+.line-m13 {
   background-color: #479e92;
 }
 
-.m17 {
+.line-m17 {
   background-color: #9b4932;
 }
 
-.str12 {
+.line-12 {
   background-color: #8471a7;
 }
 
-.str16 {
+.line-16 {
   background-color: #377da7;
 }
 
-.str18 {
+.line-18 {
   background-color: #377da7;
 }
 
-.str21 {
+.line-21 {
   background-color: #b693be;
 }
 
-.str27 {
+.line-27 {
   background-color: #bf6b31;
 }
 
-.str37 {
+.line-37 {
   background-color: #9c4b35;
 }
 
-.str50 {
+.line-50 {
   background-color: #df9537;
 }
 
-.str60 {
+.line-60 {
   background-color: #449ad4;
 }
 
-.str61 {
+.line-61 {
   background-color: #d12f26;
 }
 
-.str62 {
+.line-62 {
   background-color: #205030;
 }
 
-.str63 {
+.line-63 {
   background-color: #df7a2e;
 }
 
-.str67 {
+.line-67 {
   background-color: #cf73a4;
 }
 
-.str68 {
+.line-68 {
   background-color: #79b245;
 }

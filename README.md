@@ -52,7 +52,7 @@ Just clone the module into your modules folder of your MagicMirror² and execute
 cd ~/MagicMirror/modules/MMM-PublicTransportHafas
 git clone https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas
 cd MMM-PublicTransportHafas
-npm install
+npm ci
 ```
 
 ## Update
@@ -62,7 +62,7 @@ Go to the module’s folder inside MagicMirror modules folder and pull the lates
 ```bash
 cd ~/MagicMirror/modules/MMM-PublicTransportHafas
 git pull
-npm install --omit=dev
+npm ci
 ```
 
 ## How to get the `stationID`

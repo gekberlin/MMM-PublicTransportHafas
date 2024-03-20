@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "dayjs": "^1.11.10",
-    "hafas-client": "^6.2.2"
+    "hafas-client": "^6.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",

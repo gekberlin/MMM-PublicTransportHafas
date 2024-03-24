@@ -227,9 +227,19 @@ Some night buses in Leipzig use an orange-ish color.
 
 Alongside the departure time a small figure displays the delay as reported by the transport provider.
 
-![Time with delay](img/time_with_delay.png) ![Time without delay](img/time_without_delay.png)
+Delays are displayed as red.
 
-Delays are displayed as red. No delay or negative delays (the transport will arrive early) are displayed in green. If you want to customize that include the classes `mmm-pth-has-delay` and `mmm-pth-to-early` in your custom CSS file and make the appropriate settings.
+![Time with delay](img/time_with_delay.png)
+
+No delay or negative delays (the transport will arrive early) are displayed in green.
+
+![Time without delay](img/time_without_delay.png)
+
+Sometimes there is no real-time data for a departure, in that case it is displayed with a question mark:
+
+![Time without relat time data](img/time_without_real_time_data.png)
+
+If you want to customize that include the classes `mmm-pth-has-delay` and `mmm-pth-to-early` in your custom CSS file and make the appropriate settings.
 
 ## Technical background details
 

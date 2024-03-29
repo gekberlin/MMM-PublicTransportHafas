@@ -233,7 +233,7 @@ class PTHAFASTableBodyBuilder {
   }
 
   getDelay (delay) {
-    this.delayString = this.config.noRealtimedelayString;
+    this.delayString = this.config.noRealtimeDelayString;
     if (typeof delay === "number") {
       const sign = delay < 0
         ? "-"

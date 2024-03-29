@@ -16,6 +16,7 @@ Module.register("MMM-PublicTransportHafas", {
     hafasProfile: "db",                 // Which HAFAS profile should be used?
     hidden: false,
     updatesEvery: 120,                  // How often should the table be updated in s?
+    timeFormat: config.timeFormat,      // Since we don't use moment.js, we need to handle the time format ourselves. This is the default time format of the mirror.
 
     // Header
     headerPrefix: "",

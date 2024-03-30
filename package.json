@@ -1,6 +1,6 @@
 {
   "name": "mmm-publictransporthafas",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Public transport module for MagicMirror² driven by hafas-client data.",
   "repository": "KristjanESPERANTO/MMM-PublicTransportHafas",
   "keywords": [
@@ -45,7 +45,7 @@
   "scripts": {
     "lint": "eslint . && stylelint **/*.css && markdownlint . --ignore node_modules && prettier . --check",
     "lint:fix": "eslint . --fix && stylelint **/*.css --fix && markdownlint . --ignore node_modules --fix && prettier . --write",
-    "prepare": "husky",
+    "prepare": "[ -f node_modules/.bin/husky ] && husky || echo no husky installed.",
     "query": "node ./convenience/query_stations.mjs",
     "test": "npm run lint"
   },

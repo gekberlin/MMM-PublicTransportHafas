@@ -45,7 +45,7 @@
   "scripts": {
     "lint": "eslint . && stylelint **/*.css && markdownlint . --ignore node_modules && prettier . --check",
     "lint:fix": "eslint . --fix && stylelint **/*.css --fix && markdownlint . --ignore node_modules --fix && prettier . --write",
-    "prepare": "[ -f node_modules/.bin/husky ] && husky || echo no husky installed.",
+    "prepare": "[ -f node_modules/.bin/husky ] && husky || echo husky is not installed.",
     "query": "node ./convenience/query_stations.mjs",
     "test": "npm run lint"
   },

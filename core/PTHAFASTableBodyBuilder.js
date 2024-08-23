@@ -241,7 +241,7 @@ class PTHAFASTableBodyBuilder {
   }
 
   getDelay (delay) {
-    this.delayString = "+?";
+    this.delayString = this.config.noRealtimeDelayString;
     if (typeof delay === "number") {
       const sign = delay < 0
         ? "-"
@@ -254,14 +254,19 @@ class PTHAFASTableBodyBuilder {
 
   getDisplayDepartureTime (when, delay) {
     let time = dayjs(when);
+    let format = "HH:mm";
+
+    if (this.config.timeFormat === 12) {
+      format = "h:mm A";
+    }
 
     if (this.config.showAbsoluteTime) {
       time = dayjs(when).subtract(delay, "seconds");
-      return time.format("LT");
+      return time.format(format);
     }
 
     if (dayjs(when).diff(dayjs()) > this.config.showRelativeTimeOnlyUnder) {
-      return time.format("LT");
+      return time.format(format);
     }
 
     return time.fromNow().replace(/Minuten?/u, "'");

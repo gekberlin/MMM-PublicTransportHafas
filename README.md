@@ -46,13 +46,13 @@ For more information see the [Configuration](#configuration) section.
 
 ## Installation
 
-Just clone the module into your modules folder of your MagicMirror² and execute `npm install` in the module’s directory:
+Just clone the module into your modules folder of your MagicMirror² and execute `npm ci` in the module’s directory:
 
 ```bash
-cd ~/MagicMirror/modules/MMM-PublicTransportHafas
+cd ~/MagicMirror/modules
 git clone https://github.com/KristjanESPERANTO/MMM-PublicTransportHafas
 cd MMM-PublicTransportHafas
-npm install
+npm ci
 ```
 
 ## Update
@@ -62,7 +62,7 @@ Go to the module’s folder inside MagicMirror modules folder and pull the lates
 ```bash
 cd ~/MagicMirror/modules/MMM-PublicTransportHafas
 git pull
-npm install --omit=dev
+npm ci
 ```
 
 ## How to get the `stationID`
@@ -133,6 +133,7 @@ These are the possible options:
 | `showColoredLineSymbols`          | <p>A boolean value indicating whether the line symbols should be colored or black and white.</p><p>**Type:** `boolean`<br>**Default value:** `true`<br>**Possible values:** `true` and `false`</p><p>**Note:** If set to `true` it is possible to decorate the line labels with the colors which are used in your town. This module comes with decorations for Leipzig. To provide your own colors see [Providing a custom CSS file](#providing-a-custom-css-file).</p>|
 | `useColorForRealtimeInfo`         | <p>A boolean value indicating whether delays should be displayed in color.</p><p>**Type:** `boolean`**Default value:** `true`<br>**Possible values:** `true` and `false`</p><p>**Note:** If set to `true` a delay will be displayed in red. Values `<= 0` (transport arrives in time or early) will be displayed in green. If you want to customize that see [Providing a custom CSS file](#customizing-the-color-for-delays).</p>|
 | `showAbsoluteTime`                | <p>A boolean indicating whether the departure time should be displayed as an absolute value or not.</p><p>**Type:** `boolean`<br>**Default value:** `true`<br>**Possible values:** `true` and `false`</p><p>**Note:** If set to `true` the departure time would be displayed as “10:15+0”. If set to `false` the departure time would be displayed in a relative manner like so: `in 5 minutes`. The displayed string is determined by your locale. If your locale is set to `de` the string would be `in 5 Minuten`.</p> |
+| `noRealtimeDelayString`           | <p>The string that is displayed as delay if no real-time departure time data is available.</p><p>**Type:** `String`<br>**Default value:** `"+?"`</p><p>**Note:** Set it to `""` if you don't want to display a delay string if there is no real-time data. Use an emoji like `"⚠"` if you want mark departures without real-time data with a symbol.<br>This is only relevant if `showAbsoluteTime` is set to `true`.</p> |
 | `showRelativeTimeOnlyUnder`       | <p>Display the time only relatively if the departure takes place in less than 10 minutes (600000 milliseconds).</p><p>**Type:** `integer`<br>**Default value:** `10*60*1000` (10 minutes)<br></p><p>**Note:** The value is only relevant if `showAbsoluteTime: false`.</p> |
 | `showTableHeaders`                | <p>A boolean indicating whether a table header should be shown or not.</p><p>**Type:** `boolean`<br>**Default value:** `true`<br>**Possible values:** `true` and `false`</p><p>**Note:** If set to `false` no table headings like “time” or “direction” will be shown. Also no symbols are shown.</p>|
 | `showTableHeadersAsSymbols`       | <p>A boolean value indicating whether table headers should be shown as symbols or text.</p><p>**Type:** `boolean`<br>**Default value:** `true`<br>**Possible values:** `true` and `false`</p><p>**Note:** If set to `true` table headers will use symbols, else text will be shown. This setting is only effective if `showTableHeaders` is set to `true`. The shown text is available in English and German. Feel free to add translations to this project.</p> |
@@ -159,22 +160,22 @@ Here is an example for an entry in `config.js`
 
   config: {
     // Departures options
-    stationID: "008012202",                   // Replace with your stationID!
-    stationName: "Wilhelm-Leuschner-Platz",   // Replace with your station name!
+    stationID: "8012202",                   // Replace with your stationID!
+    stationName: "Wilhelm-Leuschner-Platz", // Replace with your station name!
     direction: "",                    // Show only departures heading to this station. (A station ID.)
     excludedTransportationTypes: [],  // Which transportation types should not be shown on the mirror? (comma-separated list of types) possible values: "tram", "bus", "suburban", "subway", "regional" and "national"
     ignoredLines: [],                 // Which lines should be ignored? (comma-separated list of line names)
     timeToStation: 10,                // How long do you need to walk to the next Station?
 
     // Look and Feel
-    displayLastUpdate: true,           // Display the last time of module update.
+    displayLastUpdate: true,          // Display the last time of module update.
     maxUnreachableDepartures: 0,      // How many unreachable departures should be shown?
     maxReachableDepartures: 7,        // How many reachable departures should be shown?
     showColoredLineSymbols: true,     // Want colored line symbols?
     customLineStyles: "",             // Prefix for the name of the custom css file. ex: Leipzig-lines.css (case sensitive)
     showOnlyLineNumbers: false,       // Display only the line number instead of the complete name, i. e. "11" instead of "STR 11"
     showTableHeadersAsSymbols: true,  // Table Headers as symbols or text?
-    useColorForRealtimeInfo: true    // Want colored real time information (timeToStation, early)?
+    useColorForRealtimeInfo: true     // Want colored real time information (timeToStation, early)?
   }
 },
 ```
@@ -227,9 +228,19 @@ Some night buses in Leipzig use an orange-ish color.
 
 Alongside the departure time a small figure displays the delay as reported by the transport provider.
 
-![Time with delay](img/time_with_delay.png) ![Time without delay](img/time_without_delay.png)
+Delays are displayed as red.
 
-Delays are displayed as red. No delay or negative delays (the transport will arrive early) are displayed in green. If you want to customize that include the classes `mmm-pth-has-delay` and `mmm-pth-to-early` in your custom CSS file and make the appropriate settings.
+![Time with delay](img/time_with_delay.png)
+
+No delay or negative delays (the transport will arrive early) are displayed in green.
+
+![Time without delay](img/time_without_delay.png)
+
+Sometimes there is no real-time data for a departure, in that case it is displayed with a question mark:
+
+![Time without relat time data](img/time_without_real_time_data.png)
+
+If you want to customize that include the classes `mmm-pth-has-delay` and `mmm-pth-to-early` in your custom CSS file and make the appropriate settings.
 
 ## Technical background details
 

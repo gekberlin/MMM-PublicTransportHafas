@@ -1,6 +1,6 @@
 {
   "name": "mmm-publictransporthafas",
-  "version": "2.0.4",
+  "version": "2.1.1",
   "description": "Public transport module for MagicMirror² driven by hafas-client data.",
   "repository": "KristjanESPERANTO/MMM-PublicTransportHafas",
   "keywords": [
@@ -25,27 +25,27 @@
     "node": ">=16"
   },
   "dependencies": {
-    "dayjs": "^1.11.10",
-    "hafas-client": "^6.2.2"
+    "dayjs": "^1.11.12",
+    "hafas-client": "^6.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
-    "@stylistic/eslint-plugin": "^1.6.2",
+    "@stylistic/eslint-plugin": "^2.6.2",
     "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.29.1",
-    "globals": "^14.0.0",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.2",
-    "markdownlint-cli": "^0.39.0",
-    "prettier": "^3.2.5",
-    "stylelint": "^16.2.1",
-    "stylelint-config-standard": "^36.0.0",
-    "stylelint-prettier": "^5.0.0"
+    "globals": "^15.9.0",
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.8",
+    "markdownlint-cli": "^0.41.0",
+    "prettier": "^3.3.3",
+    "stylelint": "^16.8.1",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-prettier": "^5.0.2"
   },
   "scripts": {
     "lint": "eslint . && stylelint **/*.css && markdownlint . --ignore node_modules && prettier . --check",
     "lint:fix": "eslint . --fix && stylelint **/*.css --fix && markdownlint . --ignore node_modules --fix && prettier . --write",
-    "prepare": "husky",
+    "prepare": "[ -f node_modules/.bin/husky ] && husky || echo husky is not installed.",
     "query": "node ./convenience/query_stations.mjs",
     "test": "npm run lint"
   },
